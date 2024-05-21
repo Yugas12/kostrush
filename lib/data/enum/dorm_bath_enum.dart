@@ -1,0 +1,4 @@
+enum DormBathEnum {
+  shared,
+  private,
+}
