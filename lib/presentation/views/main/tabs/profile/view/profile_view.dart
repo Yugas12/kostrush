@@ -5,6 +5,7 @@ import 'package:kostrushapp/presentation/themes/typography_theme.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
 
 import '../../../../../../base/base_view.dart';
+import '../../../../../../res/assets/image_asset_constant.dart';
 import '../../../../../components/appbar/default_appbar.dart';
 import '../controller/profile_controller.dart';
 
@@ -54,7 +55,10 @@ class ProfileView extends BaseView<ProfileController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleImage.network(imageEndpoint: "", radius: 50),
+            CircleImage.asset(
+              imageAsset: ImageAssetConstant.profileBlank,
+              radius: 50,
+            ),
             gap(8),
             Text(
               controller.state?.name ?? "",

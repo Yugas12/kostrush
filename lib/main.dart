@@ -32,6 +32,7 @@ class _MyAppState extends State<MyApp> {
       theme: MainTheme.lightTheme(context),
       getPages: AppPages.routes,
       initialRoute: AppPages.initial,
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
       ],

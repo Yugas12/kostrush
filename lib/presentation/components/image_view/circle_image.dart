@@ -121,6 +121,7 @@ class CircleImage extends StatelessWidget {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     return borderWidth != null ? _borderBuilder() : _baseBuilder();

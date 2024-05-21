@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
 
 import '../../../../base/base_view.dart';
+import '../../../../res/assets/image_asset_constant.dart';
 import '../../../components/appbar/default_appbar.dart';
 import '../../../components/image_view/circle_image.dart';
 import '../../../components/input/main_text_input.dart';
@@ -20,7 +21,7 @@ class DetailProfileView extends BaseView<DetailProfileController> {
   @override
   Widget body(BuildContext context, state) {
     return RefreshIndicator(
-      onRefresh: () async {},
+      onRefresh: onRefresh,
       child: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),
@@ -34,8 +35,8 @@ class DetailProfileView extends BaseView<DetailProfileController> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        CircleImage.network(
-          imageEndpoint: "",
+        CircleImage.asset(
+          imageAsset: ImageAssetConstant.profileBlank,
           radius: 50,
         ),
         gap(16),

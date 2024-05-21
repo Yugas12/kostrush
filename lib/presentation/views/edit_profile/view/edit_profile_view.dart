@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kostrushapp/presentation/components/button/main_button.dart';
 import 'package:kostrushapp/presentation/components/input/main_text_input.dart';
+import 'package:kostrushapp/res/assets/image_asset_constant.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
 
 import '../../../../base/base_view.dart';
@@ -21,7 +22,7 @@ class EditProfileView extends BaseView<EditProfileController> {
   @override
   Widget body(BuildContext context, state) {
     return RefreshIndicator(
-      onRefresh: () async {},
+      onRefresh: onRefresh,
       child: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),
@@ -42,15 +43,10 @@ class EditProfileView extends BaseView<EditProfileController> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        controller.imageFile.value != null
-            ? CircleImage.file(
-                imageFile: controller.imageFile.value?.path ?? "",
-                radius: 50,
-              )
-            : CircleImage.network(
-                imageEndpoint: "",
-                radius: 50,
-              ),
+        CircleImage.asset(
+          imageAsset: ImageAssetConstant.profileBlank,
+          radius: 50,
+        ),
         gap(8),
       ],
     );
