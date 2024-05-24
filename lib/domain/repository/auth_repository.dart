@@ -13,6 +13,7 @@ import '../../data/local/dao/profile_dao.dart';
 import '../../data/network/request/sign_in_request.dart';
 import '../../data/network/request/sign_up_request.dart';
 
+/// Kelas `AuthRepository` adalah sebuah repository yang bertanggung jawab untuk mengelola autentikasi pengguna.
 class AuthRepository {
   AuthRepository(this._service, this._storage, this._profileDao);
 
@@ -23,6 +24,16 @@ class AuthRepository {
   // Untuk membatalkan request
   final CancelToken _cancelToken = CancelToken();
 
+  /// Fungsi ini digunakan untuk melakukan proses sign in.
+  ///
+  /// [email] adalah parameter wajib berupa String yang merupakan email pengguna.
+  /// [password] adalah parameter wajib berupa String yang merupakan password pengguna.
+  ///
+  /// Fungsi ini akan mengirimkan request ke server untuk melakukan sign in.
+  /// Jika sign in berhasil, token akan disimpan ke SharedPreference.
+  /// Selain itu, data profile juga akan disimpan ke local database.
+  /// Fungsi ini akan mengembalikan data profile dari local database jika sign in berhasil,
+  /// atau mengembalikan DioException jika terjadi error.
   Future<Either<DioException, ProfileModel>> signIn(
       {required String email, required String password}) async {
     try {
@@ -58,33 +69,54 @@ class AuthRepository {
         throw Exception(e);
       });
 
+      /// Mengembalikan data profile dari local database
       return Right(localData!);
     } on DioException catch (e) {
+      /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);
     }
   }
 
+  /// Fungsi untuk melakukan proses sign out.
+  /// Mengembalikan `Future` yang berisi `Either` dari `DioException` dan `BaseResponse`.
   Future<Either<DioException, BaseResponse>> signOut() async {
     try {
-      /// Mengabil token dari SharedPreference
-      /// Jika token tidak ada maka akan mengembalikan nilai null
+      /// Mengambil token dari SharedPreference.
+      /// Jika token tidak ada, maka akan mengembalikan nilai null.
       final token = await _storage.readSecureData(StorageConstant.sessionToken);
 
-      /// Mengirim request ke server untuk sign out
+      /// Mengirim request ke server untuk sign out.
       final response = await _service.signOut(
         cancelToken: _cancelToken,
         token: "Bearer $token",
       );
 
-      /// Menghapus token dari SharedPreference
+      /// Menghapus token dari SharedPreference.
       await _storage.deleteSecureData(StorageConstant.sessionToken);
 
+      /// Mengembalikan response dari server.
       return Right(response);
     } on DioException catch (e) {
+      /// Mengembalikan exception jika terjadi kesalahan.
       return Left(e);
     }
   }
 
+  /// Melakukan pendaftaran pengguna baru dengan mengirimkan permintaan ke server.
+  ///
+  /// Parameter:
+  /// - [name]: Nama pengguna.
+  /// - [email]: Alamat email pengguna.
+  /// - [password]: Kata sandi pengguna.
+  /// - [address]: Alamat pengguna.
+  /// - [phoneNumber]: Nomor telepon pengguna.
+  /// - [occupation]: Pekerjaan pengguna.
+  ///
+  /// Mengembalikan:
+  /// - [Future<Either<DioException, ProfileResponse>>]: Objek Future yang berisi entitas Either yang berisi DioException jika terjadi kesalahan atau ProfileResponse jika pendaftaran berhasil.
+  ///
+  /// Exception:
+  /// - [DioException]: Exception yang terjadi jika terjadi kesalahan saat melakukan permintaan ke server.
   Future<Either<DioException, ProfileResponse>> signUp({
     required String name,
     required String email,
@@ -104,17 +136,15 @@ class AuthRepository {
           address: address,
           phone: phoneNumber,
           occupation: occupation,
-
-          /// Dari UI tidak ada inputan tanggal lahir
           dateBirth: DateTime.now(),
-
-          /// Dari UI tidak ada inputan jenis kelamin
           gender: GenderEnum.Male,
         ),
       );
 
+      /// Mengembalikan response dari server
       return Right(response.data!);
     } on DioException catch (e) {
+      /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);
     }
   }

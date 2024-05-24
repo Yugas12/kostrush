@@ -9,8 +9,12 @@ import '../../../../res/routes/app_routes.dart';
 import '../../../../utils/handler/http_error_handler.dart';
 import '../../detail_dormitory/argument/detail_dormitory_argument.dart';
 
+/// Kelas `SelectedResultController` adalah pengontrol untuk tampilan hasil terpilih.
+/// Kelas ini mewarisi `BaseController` dan menggunakan `SelectedResultArgument` sebagai argumen masukan
+/// dan `List<KostResponse>` sebagai hasil keluaran.
 class SelectedResultController
     extends BaseController<SelectedResultArgument, List<KostResponse>> {
+  /// Repository utama.
   final _repository = Get.find<MainRepository>();
 
   @override
@@ -24,6 +28,9 @@ class SelectedResultController
   }
 
   @override
+
+  /// Fungsi ini digunakan untuk memproses data yang diperlukan untuk tampilan hasil terpilih.
+  /// Fungsi ini akan dijalankan secara asynchronous.
   Future<void> onProcess() async {
     emitLoading();
     final result = await _repository.getRecommendedKost();
@@ -31,9 +38,11 @@ class SelectedResultController
     result.fold(
       (exception) {
         emitError(exception.message);
+
+        /// Menampilkan dialog peringatan jika status code bukan 404.
         if (exception.response?.statusCode != 404) {
           Get.dialog(AlertDialog(
-            title: Text("Error"),
+            title: const Text("Error"),
             content: Text(
                 HttpErrorHandler.parseErrorResponse(exception.response?.data)),
             actions: [
@@ -41,7 +50,7 @@ class SelectedResultController
                 onPressed: () {
                   Get.back();
                 },
-                child: Text("OK"),
+                child: const Text("OK"),
               ),
             ],
           ));
@@ -56,26 +65,31 @@ class SelectedResultController
     // TODO: implement disposeComponent
   }
 
+  /// Navigasi ke halaman detail kos-kosan berdasarkan ID kos-kosan.
+  ///
+  /// Parameter [kostId] adalah ID kos-kosan yang akan ditampilkan di halaman detail.
   void navigateToDetailDormitory(int? kostId) {
+    /// Jika ID kos-kosan tidak null, maka akan diarahkan ke halaman detail kos-kosan.
     if (kostId != null) {
       Get.toNamed(AppRoutes.detailDormitory,
           arguments: DetailDormitoryArgument(kostId));
     } else {
       Get.dialog(AlertDialog(
-        title: Text("Error"),
-        content: Text("Data tidak ditemukan"),
+        title: const Text("Error"),
+        content: const Text("Data tidak ditemukan"),
         actions: [
           TextButton(
             onPressed: () {
               Get.back();
             },
-            child: Text("OK"),
+            child: const Text("OK"),
           ),
         ],
       ));
     }
   }
 
+  /// Mendapatkan judul berdasarkan konteks.
   String get title {
     switch (arguments.context) {
       case SelectedResultContext.popularDormitory:

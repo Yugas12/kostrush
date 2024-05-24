@@ -8,6 +8,7 @@ import '../../../../base/base_view.dart';
 import '../../../components/appbar/default_appbar.dart';
 import '../controller/duration_selector_controller.dart';
 
+/// Widget untuk menampilkan tampilan pemilihan durasi kost.
 class DurationSelectorView extends BaseView<DurationSelectorController> {
   const DurationSelectorView({super.key});
 

@@ -6,6 +6,8 @@ import '../domain/repository/main_repository.dart';
 import '../domain/repository/profile_repository.dart';
 import '../domain/repository/transaction_repository.dart';
 
+/// Inisialisasi modul repository.
+/// Membuat instance dari berbagai repository yang akan digunakan dalam aplikasi.
 Future<void> initRepositoryModule() async {
   // Membuat instance AuthRepository
   Get.putAsync(

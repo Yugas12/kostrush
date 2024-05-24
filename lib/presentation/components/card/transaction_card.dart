@@ -8,7 +8,7 @@ import 'package:kostrushapp/utils/extensions/enum_ext.dart';
 import '../../themes/color_theme.dart';
 import '../../themes/typography_theme.dart';
 
-/// Class ini digunakan untuk membuat card transaksi
+/// Widget untuk menampilkan kartu transaksi.
 class TransactionCard extends StatelessWidget {
   const TransactionCard({
     super.key,

@@ -6,6 +6,8 @@ import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
 import '../../../../base/base_state.dart';
 
+/// Kelas [AboutUsController] adalah pengontrol untuk tampilan "About Us".
+/// Kelas ini mengimplementasikan [BaseController] dengan argumen [NoArguments] dan state [NoState].
 class AboutUsController extends BaseController<NoArguments, NoState> {
   @override
   void initComponent() {
@@ -27,6 +29,10 @@ class AboutUsController extends BaseController<NoArguments, NoState> {
     // TODO: implement disposeComponent
   }
 
+  /// Metode [intentToInstagram] digunakan untuk membuka aplikasi Instagram atau halaman profil pengguna di Instagram.
+  /// Metode ini akan memeriksa apakah aplikasi Instagram tersedia di perangkat pengguna.
+  /// Jika tersedia, maka akan membuka aplikasi Instagram dengan menggunakan URL yang ditentukan.
+  /// Jika tidak tersedia, maka akan menampilkan dialog kesalahan.
   void intentToInstagram() async {
     final Uri url = Uri(
       scheme: 'https',
@@ -54,6 +60,10 @@ class AboutUsController extends BaseController<NoArguments, NoState> {
     }
   }
 
+  /// Metode [intentToEmail] digunakan untuk membuka aplikasi email atau aplikasi default untuk mengirim email.
+  /// Metode ini akan memeriksa apakah aplikasi email tersedia di perangkat pengguna.
+  /// Jika tersedia, maka akan membuka aplikasi email dengan menggunakan URL yang ditentukan.
+  /// Jika tidak tersedia, maka akan menampilkan dialog kesalahan.
   void intentToEmail() async {
     final Uri url = Uri(
       scheme: 'mailto',

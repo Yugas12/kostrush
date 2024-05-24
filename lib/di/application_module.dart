@@ -34,12 +34,12 @@ Future<void> initApplicationModule() async {
   // Membuat instance PackageInfo
   await Get.putAsync(() async => PackageInfo.fromPlatform());
 
-  // Membuat instance Dio untuk melakukan request ke server
+  /// Menginisialisasi dan mengkonfigurasi objek Dio untuk digunakan dalam aplikasi.
+  /// Mengatur baseUrl sesuai dengan alamat server yang akan digunakan.
+  /// Menambahkan interceptor untuk logging request dan response menggunakan PrettyDioLogger.
   await Get.putAsync(
     () async => Dio()
-
-        /// Ubah baseUrl sesuai dengan alamat server
-        .addBaseUrl("https://29b7-103-228-246-246.ngrok-free.app")
+        .addBaseUrl("https://kostrush.tifnganjuk.com")
         .addInterceptor(
           PrettyDioLogger(
             request: true,
@@ -53,7 +53,10 @@ Future<void> initApplicationModule() async {
         ),
   );
 
-  // Membuat instance Database
+  /// Menginisialisasi dan mengatur instance [Database] menggunakan plugin [sqflite].
+  /// Database akan dibuat di direktori databases pada perangkat dengan nama 'kostrushapp.db'.
+  /// Jika database belum ada, tabel 'users' akan dibuat dengan kolom-kolom yang sesuai.
+  /// Versi database yang digunakan adalah 2.
   await Get.putAsync<Database>(
     () async => openDatabase(
       join(

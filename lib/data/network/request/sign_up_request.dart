@@ -4,6 +4,7 @@ import '../../enum/gender_enum.dart';
 
 part 'sign_up_request.g.dart';
 
+/// Kelas model yang merepresentasikan data permintaan pendaftaran pengguna baru.
 @JsonSerializable()
 class SignUpRequest {
   final String email;
@@ -20,6 +21,7 @@ class SignUpRequest {
   @JsonKey(name: 'jenis_kelamin')
   final GenderEnum gender;
 
+  /// Konstruktor untuk membuat objek SignUpRequest.
   SignUpRequest({
     required this.email,
     required this.password,
@@ -31,8 +33,10 @@ class SignUpRequest {
     required this.gender,
   });
 
+  /// Membuat objek SignUpRequest dari JSON.
   factory SignUpRequest.fromJson(Map<String, dynamic> json) =>
       _$SignUpRequestFromJson(json);
 
+  /// Mengonversi objek SignUpRequest menjadi JSON.
   Map<String, dynamic> toJson() => _$SignUpRequestToJson(this);
 }

@@ -15,10 +15,21 @@ import '../../../components/input/main_text_input.dart';
 import '../../../themes/typography_theme.dart';
 import '../controller/detail_transaction_controller.dart';
 
+/// FILEPATH: /B:/kostrush/lib/presentation/views/detail_transaction/view/detail_transaction_view.dart
+/// 
+/// Kelas DetailTransactionView adalah tampilan halaman detail transaksi.
+/// Kelas ini mengimplementasikan BaseView dan CustomSliverMixin.
 class DetailTransactionView extends BaseView<DetailTransactionController>
     with CustomSliverMixin {
+  
+  /// Konstruktor DetailTransactionView.
+  /// 
+  /// [key] adalah kunci unik untuk widget ini.
   const DetailTransactionView({super.key});
 
+  /// Mengoverride metode appBar untuk menampilkan AppBar kustom.
+  /// 
+  /// Metode ini mengembalikan widget PreferredSizeWidget yang berisi DefaultAppBar dengan judul "Detail Transaksi".
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return DefaultAppBar(
@@ -26,6 +37,10 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
     );
   }
 
+  /// Mengoverride metode body untuk menampilkan isi halaman.
+  /// 
+  /// Metode ini mengembalikan widget RefreshIndicator yang berisi CustomScrollView dengan beberapa Sliver.
+  /// Sliver ini berisi form builder, time picker builder, summary builder, dan bottom button builder.
   @override
   Widget body(BuildContext context, state) {
     return RefreshIndicator(
@@ -52,6 +67,10 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
     );
   }
 
+  /// Metode untuk membangun form.
+  /// 
+  /// Metode ini mengembalikan widget Container yang berisi Column dengan beberapa MainTextInput.
+  /// MainTextInput digunakan untuk menginputkan informasi penyewa seperti nama, nomor telepon, pekerjaan, dan tipe kamar.
   Widget _formBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -91,6 +110,10 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
     );
   }
 
+  /// Metode untuk membangun time picker.
+  /// 
+  /// Metode ini mengembalikan widget Container yang berisi Column dengan beberapa MainTextInput.
+  /// MainTextInput digunakan untuk memilih tanggal sewa dan durasi sewa.
   Widget _timePickerBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -120,6 +143,10 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
     );
   }
 
+  /// Metode untuk membangun summary.
+  /// 
+  /// Metode ini mengembalikan widget Container yang berisi Column dengan beberapa Text.
+  /// Text ini menampilkan informasi biaya sewa kost.
   Widget _summaryBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -157,6 +184,10 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
     );
   }
 
+  /// Metode untuk membangun bottom button.
+  /// 
+  /// Metode ini mengembalikan widget Container yang berisi Column dengan beberapa Text.
+  /// Text ini menampilkan status transaksi dan pesan status.
   Widget _bottomButtonBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -189,6 +220,9 @@ class DetailTransactionView extends BaseView<DetailTransactionController>
     );
   }
 
+  /// Metode untuk mendapatkan warna status transaksi.
+  /// 
+  /// Metode ini mengembalikan warna yang sesuai dengan status transaksi.
   Color? _statusColor(TransactionStatusEnum status) {
     switch (status) {
       case TransactionStatusEnum.pending:

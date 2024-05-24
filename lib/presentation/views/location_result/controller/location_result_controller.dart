@@ -9,6 +9,7 @@ import '../../../../res/routes/app_routes.dart';
 import '../../../../utils/handler/http_error_handler.dart';
 import '../../detail_dormitory/argument/detail_dormitory_argument.dart';
 
+/// Controller untuk tampilan hasil lokasi.
 class LocationResultController
     extends BaseController<LocationResultArgument, List<KostResponse>> {
   final _repository = Get.find<KostRepository>();
@@ -35,7 +36,7 @@ class LocationResultController
 
         if (exception.response?.statusCode! != 404 & 400) {
           Get.dialog(AlertDialog(
-            title: Text("Error"),
+            title: const Text("Error"),
             content: Text(
                 HttpErrorHandler.parseErrorResponse(exception.response?.data)),
             actions: [
@@ -43,7 +44,7 @@ class LocationResultController
                 onPressed: () {
                   Get.back();
                 },
-                child: Text("OK"),
+                child: const Text("OK"),
               ),
             ],
           ));
@@ -58,20 +59,23 @@ class LocationResultController
     // TODO: implement disposeComponent
   }
 
+  /// Navigasi ke halaman detail asrama.
+  ///
+  /// [kostId] ID dari kost yang akan ditampilkan detailnya.
   void navigateToDetailDormitory(int? kostId) {
     if (kostId != null) {
       Get.toNamed(AppRoutes.detailDormitory,
           arguments: DetailDormitoryArgument(kostId));
     } else {
       Get.dialog(AlertDialog(
-        title: Text("Error"),
-        content: Text("Data tidak ditemukan"),
+        title: const Text("Error"),
+        content: const Text("Data tidak ditemukan"),
         actions: [
           TextButton(
             onPressed: () {
               Get.back();
             },
-            child: Text("OK"),
+            child: const Text("OK"),
           ),
         ],
       ));

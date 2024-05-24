@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Kelas DashedLinePainter adalah kelas yang mengimplementasikan CustomPainter
+/// untuk menggambar garis putus-putus.
 class DashedLinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

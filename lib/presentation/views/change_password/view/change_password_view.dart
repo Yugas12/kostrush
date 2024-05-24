@@ -7,6 +7,7 @@ import '../../../../base/base_view.dart';
 import '../../../components/appbar/default_appbar.dart';
 import '../controller/change_password_controller.dart';
 
+/// Widget untuk tampilan halaman ubah kata sandi.
 class ChangePasswordView extends BaseView<ChangePasswordController> {
   const ChangePasswordView({super.key});
 

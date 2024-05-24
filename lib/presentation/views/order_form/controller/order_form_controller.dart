@@ -19,6 +19,7 @@ import '../../../../utils/handler/http_error_handler.dart';
 import '../../../components/focus_node/no_focus_node.dart';
 import '../../success/argument/success_argument.dart';
 
+/// Controller untuk halaman formulir pemesanan.
 class OrderFormController
     extends BaseController<OrderFormArgument, KostResponse>
     with CameraGalleryService {
@@ -78,7 +79,7 @@ class OrderFormController
       (exception) {
         emitError(exception.message);
         Get.dialog(AlertDialog(
-          title: Text("Error"),
+          title: const Text("Error"),
           content: Text(
               HttpErrorHandler.parseErrorResponse(exception.response?.data)),
           actions: [
@@ -86,13 +87,13 @@ class OrderFormController
               onPressed: () {
                 Get.back();
               },
-              child: Text("OK"),
+              child: const Text("OK"),
             ),
           ],
         ));
       },
       (data) {
-        price.value = data.startPrice ?? 0;
+        price.value = int.tryParse(data.startPrice!) ?? 0;
 
         emitSuccess(data);
       },
@@ -117,6 +118,7 @@ class OrderFormController
     price.close();
   }
 
+  /// Membuka galeri untuk memilih gambar.
   void launchGallery() async {
     openGallery(
         isPermissionGranted: await requestCameraGalleryPermissions(),
@@ -128,6 +130,7 @@ class OrderFormController
         });
   }
 
+  /// Menampilkan dialog untuk memilih tanggal.
   void pickDate(BuildContext context) {
     showDatePicker(
       context: context,
@@ -143,6 +146,7 @@ class OrderFormController
     });
   }
 
+  /// Navigasi ke halaman pemilih durasi.
   void navigateToDurationSelector() async {
     var result = await Get.toNamed(
       AppRoutes.selectDuration,
@@ -160,10 +164,11 @@ class OrderFormController
 
       logger.d("Result: ${result.duration?.duration}");
 
-      price.value = (state?.startPrice ?? 0) * selectedDuration.value!.value;
+      price.value = (int.tryParse(state!.startPrice!) ?? 0) * selectedDuration.value!.value;
     }
   }
 
+  /// Mengirimkan pesanan.
   void submitOrder() async {
     if (selectedFile.value == null) {
       Get.dialog(
@@ -183,6 +188,7 @@ class OrderFormController
       return;
     }
 
+    /// Memeriksa apakah tanggal sudah dipilih.
     if (selectedDate.value == null) {
       Get.dialog(
         AlertDialog(
@@ -201,6 +207,7 @@ class OrderFormController
       return;
     }
 
+    /// Memeriksa apakah durasi sudah dipilih.
     if (selectedDuration.value == null) {
       Get.dialog(
         AlertDialog(
@@ -219,8 +226,10 @@ class OrderFormController
       return;
     }
 
+    /// Mengirim data transaksi ke server.
     final result = await _repository.createTransaction(
       kostId: arguments.kostId,
+      roomId: arguments.roomId,
       price: price.value,
       date: selectedDate.value!,
       duration: selectedDuration.value!.value,
@@ -229,8 +238,9 @@ class OrderFormController
 
     result.fold(
       (exception) {
+        /// Menampilkan dialog error.
         Get.dialog(AlertDialog(
-          title: Text("Error"),
+          title: const Text("Error"),
           content: Text(
               HttpErrorHandler.parseErrorResponse(exception.response?.data)),
           actions: [
@@ -238,17 +248,19 @@ class OrderFormController
               onPressed: () {
                 Get.back();
               },
-              child: Text("OK"),
+              child: const Text("OK"),
             ),
           ],
         ));
       },
       (data) {
+        /// Navigasi ke halaman sukses.
         navigateToSuccess();
       },
     );
   }
 
+  /// Navigasi ke halaman sukses.
   void navigateToSuccess() {
     Get.toNamed(
       AppRoutes.success,

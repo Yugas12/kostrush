@@ -11,18 +11,19 @@ import '../../../../../components/input/main_text_input.dart';
 import '../../../../../themes/color_theme.dart';
 import '../controller/dashboard_controller.dart';
 
+/// Kelas `DashboardView` adalah tampilan utama untuk tab dashboard dalam aplikasi.
 class DashboardView extends BaseView<DashboardController> {
   const DashboardView({super.key});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return DashboardAppBar();
+    return const DashboardAppBar();
   }
 
   @override
   Widget body(BuildContext context, state) {
     return RefreshIndicator(
-      onRefresh: () async {},
+      onRefresh: onRefresh,
       child: CustomScrollView(
         scrollDirection: Axis.vertical,
         slivers: [
@@ -57,6 +58,7 @@ class DashboardView extends BaseView<DashboardController> {
     );
   }
 
+  /// Widget untuk membangun tampilan lokasi.
   Widget _locationBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -97,6 +99,7 @@ class DashboardView extends BaseView<DashboardController> {
                   name: element["name"] ?? "",
                   imagePath: element["imagePath"] ?? "",
                   onTap: () {
+                    /// Navigasi ke halaman pencarian kost.
                     controller.navigateToLocationResult(index);
                   },
                 );
@@ -108,6 +111,7 @@ class DashboardView extends BaseView<DashboardController> {
     );
   }
 
+  /// Widget untuk membangun tampilan kost populer.
   Widget _popularBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -131,7 +135,7 @@ class DashboardView extends BaseView<DashboardController> {
                   splashFactory: NoSplash.splashFactory,
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  child: Text(
+                  child: const Text(
                     "Lihat Semua",
                   ),
                 )
@@ -139,23 +143,24 @@ class DashboardView extends BaseView<DashboardController> {
             ),
           ),
           gap(8),
-          Container(
-            height: 240,
+          SizedBox(
+            height: 260,
             child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              separatorBuilder: (context, index) => SizedBox(width: 8.0),
+              separatorBuilder: (context, index) => const SizedBox(width: 8.0),
               itemCount: controller.state?.recommendedKost.length ?? 0,
               itemBuilder: (context, index) {
                 final kost = controller.state?.recommendedKost[index];
 
                 return DormCard(
                   type: kost?.type ?? "",
-                  price: kost?.startPrice ?? 0,
+                  price: int.tryParse(kost!.startPrice!) ?? 0,
                   name: kost?.name ?? "",
                   address: kost?.address ?? "",
                   onTap: () {
+                    /// Navigasi ke halaman detail kost.
                     controller.navigateToCheapDormitoryDetail(index);
                   },
                 );
@@ -167,6 +172,7 @@ class DashboardView extends BaseView<DashboardController> {
     );
   }
 
+  /// Widget untuk membangun tampilan kost rekomendasi.
   Widget _recommendedBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -190,7 +196,7 @@ class DashboardView extends BaseView<DashboardController> {
                   splashFactory: NoSplash.splashFactory,
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  child: Text(
+                  child: const Text(
                     "Lihat Semua",
                   ),
                 )
@@ -198,23 +204,24 @@ class DashboardView extends BaseView<DashboardController> {
             ),
           ),
           gap(8),
-          Container(
-            height: 240,
+          SizedBox(
+            height: 260,
             child: ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              separatorBuilder: (context, index) => SizedBox(width: 8.0),
+              separatorBuilder: (context, index) => const SizedBox(width: 8.0),
               itemCount: controller.state?.cheapKost.length ?? 0,
               itemBuilder: (context, index) {
                 final kost = controller.state?.cheapKost[index];
 
                 return DormCard(
                   type: kost?.type ?? "",
-                  price: kost?.startPrice ?? 0,
+                  price: int.tryParse(kost!.startPrice!) ?? 0,
                   name: kost?.name ?? "",
                   address: kost?.address ?? "",
                   onTap: () {
+                    /// Navigasi ke halaman detail kost.
                     controller.navigateToCheapDormitoryDetail(index);
                   },
                 );

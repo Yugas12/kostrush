@@ -7,8 +7,8 @@ import '../../../../base/base_state.dart';
 import '../../../../res/routes/app_routes.dart';
 import '../../success/argument/success_argument.dart';
 
-class ResetPasswordController
-    extends BaseController<ResetPasswordArgument, NoState> {
+/// Controller untuk halaman reset password.
+class ResetPasswordController extends BaseController<ResetPasswordArgument, NoState> {
   late TextEditingController passwordController;
   late TextEditingController confirmPasswordController;
 
@@ -34,6 +34,7 @@ class ResetPasswordController
     confirmPasswordController.dispose();
   }
 
+  /// Navigasi ke halaman sukses setelah berhasil mengubah kata sandi.
   void navigateToSuccess() {
     Get.toNamed(
       AppRoutes.success,

@@ -7,8 +7,9 @@ import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
 import '../../../../domain/repository/main_repository.dart';
 
-class DetailProfileController
-    extends BaseController<NoArguments, ProfileModel> {
+/// Kelas [DetailProfileController] adalah pengontrol untuk tampilan detail profil.
+/// Kelas ini mengimplementasikan [BaseController] dengan argumen [NoArguments] dan model [ProfileModel].
+class DetailProfileController extends BaseController<NoArguments, ProfileModel> {
   final _mainRepository = Get.find<MainRepository>();
 
   late TextEditingController nameController;
@@ -44,7 +45,7 @@ class DetailProfileController
       emitError(exception.toString());
       Get.dialog(AlertDialog(
         title: Text("Error"),
-        content: Text("Something went wrong. Please try again later."),
+        content: Text("Terjadi kesalahan. Silakan coba lagi nanti."),
         actions: [
           TextButton(
             onPressed: () {

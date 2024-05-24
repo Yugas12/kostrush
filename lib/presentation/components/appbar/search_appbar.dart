@@ -4,6 +4,8 @@ import 'package:kostrushapp/presentation/components/input/main_text_input.dart';
 
 import '../../themes/color_theme.dart';
 
+/// Widget yang mewakili AppBar dengan fungsi pencarian.
+/// Kelas ini merupakan turunan dari StatelessWidget dan mengimplementasikan PreferredSizeWidget.
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SearchAppBar({
     Key? key,

@@ -10,8 +10,9 @@ import '../../../../../../res/routes/app_routes.dart';
 import '../../../../../../utils/handler/http_error_handler.dart';
 import '../../../../detail_transaction/argument/detail_transaction_argument.dart';
 
-class TransactionController
-    extends BaseController<NoArguments, List<TransactionResponse>> {
+/// Kelas [TransactionController] adalah pengontrol untuk tampilan transaksi.
+/// Kelas ini mengimplementasikan [BaseController] dengan argumen [NoArguments] dan hasil [List<TransactionResponse>].
+class TransactionController extends BaseController<NoArguments, List<TransactionResponse>> {
   final _repository = Get.find<TransactionRepository>();
 
   late ProfileModel profile;
@@ -59,6 +60,8 @@ class TransactionController
     // TODO: implement disposeComponent
   }
 
+  /// Metode [navigateToDetailTransaction] digunakan untuk menavigasi ke halaman detail transaksi.
+  /// Metode ini menerima [index] sebagai argumen yang menunjukkan indeks transaksi yang akan ditampilkan.
   void navigateToDetailTransaction(int index) {
     if (state != null) {
       Get.toNamed(

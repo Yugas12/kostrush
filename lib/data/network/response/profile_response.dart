@@ -3,6 +3,7 @@ import 'package:kostrushapp/data/enum/gender_enum.dart';
 
 part 'profile_response.g.dart';
 
+/// Kelas yang merepresentasikan respons profil pengguna.
 @JsonSerializable()
 class ProfileResponse {
   final int? id;
@@ -19,6 +20,7 @@ class ProfileResponse {
   @JsonKey(name: 'pekerjaan')
   final String? occupation;
 
+  /// Konstruktor untuk membuat objek ProfileResponse.
   ProfileResponse({
     this.id,
     this.name,
@@ -30,8 +32,10 @@ class ProfileResponse {
     this.occupation,
   });
 
+  /// Membuat objek ProfileResponse dari JSON.
   factory ProfileResponse.fromJson(Map<String, dynamic> json) =>
       _$ProfileResponseFromJson(json);
 
+  /// Mengonversi objek ProfileResponse menjadi JSON.
   Map<String, dynamic> toJson() => _$ProfileResponseToJson(this);
 }

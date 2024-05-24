@@ -9,8 +9,8 @@ import '../../../../domain/repository/transaction_repository.dart';
 import '../../../../utils/handler/http_error_handler.dart';
 import '../../../components/focus_node/no_focus_node.dart';
 
-class DetailTransactionController
-    extends BaseController<DetailTransactionArgument, TransactionResponse> {
+/// Kelas controller untuk halaman detail transaksi.
+class DetailTransactionController extends BaseController<DetailTransactionArgument, TransactionResponse> {
   final _repository = Get.find<TransactionRepository>();
 
   late TextEditingController nameController;
@@ -44,7 +44,7 @@ class DetailTransactionController
     final result = await _repository.getTransactionById(arguments.id);
 
     result.fold(
-          (exception) {
+      (exception) {
         emitError(exception.toString());
         if (exception.response?.statusCode != 404) {
           Get.dialog(AlertDialog(
@@ -62,7 +62,7 @@ class DetailTransactionController
           ));
         }
       },
-          (data) {
+      (data) {
         nameController.text = data.user?.name ?? "";
         phoneController.text = data.user?.phoneNumber ?? "";
         occupationController.text = data.user?.occupation ?? "";
@@ -84,6 +84,4 @@ class DetailTransactionController
     durationController.dispose();
     noFocusNode.dispose();
   }
-
-
 }

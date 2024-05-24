@@ -12,6 +12,7 @@ import '../../../../../../domain/repository/main_repository.dart';
 import '../../../../../../res/assets/image_asset_constant.dart';
 import '../../../../location_result/argument/location_result_argument.dart';
 
+/// Kelas `DashboardController` adalah pengontrol untuk halaman beranda.
 class DashboardController extends BaseController<NoArguments, DashboardModel> {
   final _mainRepository = Get.find<MainRepository>();
 
@@ -115,43 +116,49 @@ class DashboardController extends BaseController<NoArguments, DashboardModel> {
 
     final result = await _mainRepository.getDashboard();
     result.fold(
-          (exception) {
+      (exception) {
         emitError(exception.toString());
         Get.dialog(AlertDialog(
-          title: Text("Error"),
-          content: Text("Terjadi kesalahan saat mengambil data dari server"),
+          title: const Text("Error"),
+          content:
+              const Text("Terjadi kesalahan saat mengambil data dari server"),
           actions: [
             TextButton(
               onPressed: () {
                 Get.back();
               },
-              child: Text("OK"),
+              child: const Text("OK"),
             ),
           ],
         ));
       },
-          (data) => emitSuccess(data),
+      (data) => emitSuccess(data),
     );
   }
 
+  /// Navigasi ke halaman hasil pencarian lokasi berdasarkan indeks lokasi yang dipilih.
   void navigateToLocationResult(int index) {
     Get.toNamed(
       AppRoutes.locationResult,
       arguments: LocationResultArgument(
-          locationName: locationList[index]["name"] ?? ""),
+        locationName: locationList[index]["name"] ?? "",
+      ),
     );
   }
 
+  /// Navigasi ke halaman pencarian.
   void navigateToSearch() {
     Get.toNamed(AppRoutes.search);
   }
 
+  /// Navigasi ke halaman detail kos rekomendasi berdasarkan indeks kos yang dipilih.
   void navigateToRecommendedDormitoryDetail(int index) {
-    _navigateToDetailDormitory(state!.recommendedKost?[index].id);
+    _navigateToDetailDormitory(state!.recommendedKost[index].id);
   }
 
+  /// Navigasi ke halaman detail kos murah berdasarkan indeks kos yang dipilih.
   void navigateToCheapDormitoryDetail(int index) {
-    _navigateToDetailDormitory(state!.cheapKost?[index].id);
+    _navigateToDetailDormitory(state!.cheapKost[index].id);
   }
 
   void _navigateToDetailDormitory(int? kostId) {
@@ -160,14 +167,14 @@ class DashboardController extends BaseController<NoArguments, DashboardModel> {
           arguments: DetailDormitoryArgument(kostId));
     } else {
       Get.dialog(AlertDialog(
-        title: Text("Error"),
-        content: Text("Data tidak ditemukan"),
+        title: const Text("Error"),
+        content: const Text("Data tidak ditemukan"),
         actions: [
           TextButton(
             onPressed: () {
               Get.back();
             },
-            child: Text("OK"),
+            child: const Text("OK"),
           ),
         ],
       ));
@@ -185,10 +192,12 @@ class DashboardController extends BaseController<NoArguments, DashboardModel> {
         arguments: SelectedResultArgument(context));
   }
 
+  /// Navigasi ke halaman kos populer.
   void navigateToPopularDormitory() {
     _navigateToSelectedResult(SelectedResultContext.popularDormitory);
   }
 
+  /// Navigasi ke halaman kos murah.
   void navigateToCheapDormitory() {
     _navigateToSelectedResult(SelectedResultContext.cheapDormitory);
   }

@@ -3,6 +3,7 @@ import 'package:kostrushapp/data/enum/gender_enum.dart';
 
 part 'update_profile_request.g.dart';
 
+/// Kelas model yang merepresentasikan permintaan untuk memperbarui profil pengguna.
 @JsonSerializable()
 class UpdateProfileRequest {
   final String name;
@@ -18,6 +19,7 @@ class UpdateProfileRequest {
   @JsonKey(name: 'jenis_kelamin')
   final GenderEnum gender;
 
+  /// Konstruktor untuk membuat instance dari [UpdateProfileRequest].
   UpdateProfileRequest({
     required this.name,
     required this.email,
@@ -28,8 +30,10 @@ class UpdateProfileRequest {
     required this.gender,
   });
 
+  /// Membuat instance [UpdateProfileRequest] dari JSON.
   factory UpdateProfileRequest.fromJson(Map<String, dynamic> json) =>
       _$UpdateProfileRequestFromJson(json);
 
+  /// Mengonversi instance [UpdateProfileRequest] menjadi JSON.
   Map<String, dynamic> toJson() => _$UpdateProfileRequestToJson(this);
 }

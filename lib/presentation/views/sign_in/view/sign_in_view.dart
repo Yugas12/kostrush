@@ -5,16 +5,20 @@ import 'package:kostrushapp/presentation/components/input/main_password_text_inp
 import 'package:kostrushapp/presentation/components/input/main_text_input.dart';
 import 'package:kostrushapp/presentation/themes/color_theme.dart';
 import 'package:kostrushapp/presentation/themes/typography_theme.dart';
-import 'package:kostrushapp/res/assets/icon_asset_constant.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
 
 import '../../../../../base/base_view.dart';
 import '../../../../../res/assets/svg_asset_constant.dart';
 import '../controller/sign_in_controller.dart';
 
+/// Kelas SignInView adalah kelas yang mewakili tampilan untuk halaman masuk.
+/// Kelas ini merupakan turunan dari kelas BaseView dan menggunakan SignInController sebagai kontrolernya.
 class SignInView extends BaseView<SignInController> {
   const SignInView({super.key});
 
+  /// Mengembalikan widget AppBar yang diinginkan untuk tampilan SignIn.
+  ///
+  /// Jika tidak ada AppBar yang diperlukan, maka akan mengembalikan null.
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return null;
@@ -51,6 +55,7 @@ class SignInView extends BaseView<SignInController> {
                 gap(8),
                 InkWell(
                   onTap: () {
+                    /// Navigasi ke halaman pendaftaran.
                     controller.navigateToSignUp();
                   },
                   child: Text(
@@ -67,6 +72,7 @@ class SignInView extends BaseView<SignInController> {
     );
   }
 
+  /// Widget untuk membangun form.
   Widget _formBuilder() {
     return Container(
       child: Form(
@@ -83,48 +89,22 @@ class SignInView extends BaseView<SignInController> {
             MainPasswordTextInput(
               controller: controller.passwordController,
             ),
-            // gap(8),
-            // Container(
-            //   alignment: Alignment.centerRight,
-            //   child: InkWell(
-            //     onTap: () {
-            //       controller.navigateToForgetPassword();
-            //     },
-            //     splashColor: Colors.transparent,
-            //     highlightColor: Colors.transparent,
-            //     splashFactory: NoSplash.splashFactory,
-            //     child: Text(
-            //       "Lupa Password?",
-            //     ),
-            //   ),
-            // ),
             gap(16),
             MainButton(
               onTap: () {
+                /// Memanggil metode `signIn()` pada objek `controller`.
                 controller.signIn();
               },
               label: "Masuk",
               buttonWidth: ButtonWidth.full,
             ),
-            // _authDivider(),
-            // MainButton.icon(
-            //   onTap: () {},
-            //   icon: SvgPicture.asset(
-            //     IconAssetConstant.google,
-            //     height: 16,
-            //     width: 16,
-            //   ),
-            //   color: ColorsTheme.neutralColor[400],
-            //   label: "Masuk Dengan Google",
-            //   buttonType: ButtonType.outlined,
-            //   buttonWidth: ButtonWidth.full,
-            // ),
           ],
         ),
       ),
     );
   }
 
+  /// Widget untuk menampilkan pemisah antara elemen-elemen autentikasi.
   Widget _authDivider() {
     return const Row(
       children: [

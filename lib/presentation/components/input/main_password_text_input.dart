@@ -32,6 +32,8 @@ class _MainPasswordTextInputState extends State<MainPasswordTextInput> {
       inputType: TextInputType.visiblePassword,
       obscureText: _obscureText,
       validator: MainTextInputValidator.password,
+
+      /// Suffix icon untuk menampilkan atau menyembunyikan password
       suffixIcon: !_obscureText
           ? Icon(
               Icons.visibility,
@@ -43,6 +45,7 @@ class _MainPasswordTextInputState extends State<MainPasswordTextInput> {
             ),
       onTapSuffix: () {
         setState(() {
+          /// Mengubah status obscureText
           _obscureText = !_obscureText;
         });
       },

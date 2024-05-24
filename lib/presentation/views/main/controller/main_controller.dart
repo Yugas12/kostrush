@@ -8,6 +8,7 @@ import '../tabs/dashboard/controller/dashboard_controller.dart';
 import '../tabs/profile/controller/profile_controller.dart';
 import '../tabs/transaction/controller/transaction_controller.dart';
 
+/// Controller untuk tampilan utama aplikasi.
 class MainController extends GetxController {
   final selectedIndex = 0.obs;
 
@@ -23,6 +24,8 @@ class MainController extends GetxController {
     Get.find<ProfileController>(),
   ];
 
+  /// Fungsi yang dipanggil ketika halaman berubah.
+  /// [index] adalah indeks halaman yang dipilih.
   void onPageChange(int index) {
     selectedIndex.value = index;
 
