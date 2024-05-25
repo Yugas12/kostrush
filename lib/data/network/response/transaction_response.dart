@@ -23,7 +23,7 @@ class TransactionResponse {
 
   /// Biaya transaksi.
   @JsonKey(name: 'biaya')
-  final int? total;
+  final String? total;
 
   /// Tanggal check-in.
   @JsonKey(name: 'tanggal_masuk')

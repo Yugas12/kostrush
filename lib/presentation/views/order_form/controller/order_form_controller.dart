@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/model/kost_model.dart';
 import 'package:kostrushapp/data/network/response/kost_response.dart';
 import 'package:kostrushapp/domain/repository/transaction_repository.dart';
 import 'package:kostrushapp/presentation/views/duration_selector/argument/duration_selector_argument.dart';
@@ -21,7 +22,7 @@ import '../../success/argument/success_argument.dart';
 
 /// Controller untuk halaman formulir pemesanan.
 class OrderFormController
-    extends BaseController<OrderFormArgument, KostResponse>
+    extends BaseController<OrderFormArgument, KostModel>
     with CameraGalleryService {
   final _repository = Get.find<TransactionRepository>();
   final _profileRepository = Get.find<ProfileRepository>();

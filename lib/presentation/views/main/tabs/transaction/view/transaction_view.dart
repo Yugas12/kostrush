@@ -32,7 +32,7 @@ class TransactionView extends BaseView<TransactionController> {
           return TransactionCard(
             name: transaksi?.kost?.name ?? "",
             address: transaksi?.kost?.address ?? "",
-            price: transaksi?.total ?? 0,
+            price: int.tryParse(transaksi?.total ?? "0") ?? 0,
             status: transaksi?.status ?? TransactionStatusEnum.pending,
             onTap: () {
               /// Navigasi ke halaman detail transaksi.

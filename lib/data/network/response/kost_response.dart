@@ -8,7 +8,7 @@ part 'kost_response.g.dart';
 class KostResponse {
   /// ID dari kost.
   @JsonKey(name: 'id_kost')
-  final int? id;
+  final dynamic id;
 
   /// Nama dari kost.
   @JsonKey(name: 'nama_kost')

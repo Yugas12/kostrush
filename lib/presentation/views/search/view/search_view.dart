@@ -44,7 +44,7 @@ class SearchView extends BaseView<SearchViewController> {
                 return Center(
                   child: DormCard(
                     type: kost?.type ?? "",
-                    price: int.tryParse(kost!.startPrice!) ?? 0,
+                    price: kost!.startPrice ?? 0,
                     name: kost?.name ?? "",
                     address: kost?.address ?? "",
                     onTap: () {

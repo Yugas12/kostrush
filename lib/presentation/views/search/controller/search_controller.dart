@@ -7,13 +7,14 @@ import 'package:kostrushapp/domain/repository/kost_repository.dart';
 
 import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
+import '../../../../data/model/kost_model.dart';
 import '../../../../res/routes/app_routes.dart';
 import '../../../../utils/handler/http_error_handler.dart';
 import '../../detail_dormitory/argument/detail_dormitory_argument.dart';
 
 /// Kelas `SearchViewController` adalah kelas yang bertanggung jawab untuk mengontrol tampilan pencarian.
 class SearchViewController
-    extends BaseController<NoArguments, List<KostResponse>> {
+    extends BaseController<NoArguments, List<KostModel>> {
   /// Repository kost.
   final _repository = Get.find<KostRepository>();
 

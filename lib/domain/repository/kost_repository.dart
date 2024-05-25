@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:kostrushapp/data/local/share_pref/storage_preference.dart';
+import 'package:kostrushapp/data/model/kost_model.dart';
 import 'package:kostrushapp/data/network/service/kost_service.dart';
 
 import '../../data/network/response/kost_response.dart';
@@ -29,15 +30,17 @@ class KostRepository {
   ///   (kosts) => print('Daftar Kost: $kosts'),
   /// );
   /// ```
-  Future<Either<DioException, List<KostResponse>>> getKosts() async {
+  Future<Either<DioException, List<KostModel>>> getKosts() async {
     try {
       /// Mengirim permintaan ke server untuk mendapatkan daftar Kost
       final response = await _kostService.getKost(
         cancelToken: _cancelToken,
       );
 
+      final data = response.data!.map((e) => KostModel.fromResponse(e)).toList();
+
       /// Mengembalikan daftar Kost jika permintaan berhasil
-      return Right(response.data!);
+      return Right(data);
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);
@@ -57,7 +60,7 @@ class KostRepository {
   /// Mengembalikan:
   /// - [Right] dengan [KostResponse] jika permintaan berhasil.
   /// - [Left] dengan [DioException] jika terjadi [DioException] selama permintaan.
-  Future<Either<DioException, KostResponse>> getKostById(int id) async {
+  Future<Either<DioException, KostModel>> getKostById(int id) async {
     try {
       /// Mengirim permintaan ke server untuk mendapatkan Kost berdasarkan ID
       final response = await _kostService.getKostById(
@@ -66,7 +69,7 @@ class KostRepository {
       );
 
       /// Mengembalikan data Kost jika permintaan berhasil
-      return Right(response.data!);
+      return Right(KostModel.fromResponse(response.data!));
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);
@@ -93,7 +96,7 @@ class KostRepository {
   ///   // Lakukan sesuatu dengan error
   /// }
   /// ```
-  Future<Either<DioException, List<KostResponse>>> getKostBySubLocality(
+  Future<Either<DioException, List<KostModel>>> getKostBySubLocality(
       String subLocality) async {
     try {
       /// Mengirim permintaan ke server untuk mendapatkan Kost berdasarkan sub-lokasi
@@ -102,7 +105,10 @@ class KostRepository {
         query: subLocality,
       );
 
-      return Right(response.data!);
+      final data = response.data!.map((e) => KostModel.fromResponse(e)).toList();
+
+      /// Mengembalikan daftar Kost jika permintaan berhasil
+      return Right(data);
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);
@@ -113,7 +119,7 @@ class KostRepository {
   ///
   /// Mengembalikan `List<KostResponse>` jika berhasil ditemukan,
   /// atau `DioException` jika terjadi kesalahan.
-  Future<Either<DioException, List<KostResponse>>> searchKost(
+  Future<Either<DioException, List<KostModel>>> searchKost(
       String query) async {
     try {
       /// Mengirim permintaan ke server untuk mencari Kost
@@ -122,8 +128,10 @@ class KostRepository {
         query: query,
       );
 
+      final data = response.data!.map((e) => KostModel.fromResponse(e)).toList();
+
       /// Mengembalikan daftar Kost jika permintaan berhasil
-      return Right(response.data!);
+      return Right(data);
     } on DioException catch (e) {
       /// Mengembalikan exception jika terjadi kesalahan
       return Left(e);

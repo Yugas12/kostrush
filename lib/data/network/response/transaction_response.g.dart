@@ -11,7 +11,7 @@ TransactionResponse _$TransactionResponseFromJson(Map<String, dynamic> json) =>
       id: (json['id_transaksi'] as num?)?.toInt(),
       roomId: (json['id_kamar'] as num?)?.toInt(),
       roomName: json['nama_kamar'] as String?,
-      total: (json['biaya'] as num?)?.toInt(),
+      total: json['biaya'] as String?,
       checkIn: json['tanggal_masuk'] == null
           ? null
           : DateTime.parse(json['tanggal_masuk'] as String),
