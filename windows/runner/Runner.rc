@@ -50,7 +50,7 @@ END
 // Icon
 //
 
-// Icon with lowest ID value placed first to ensure application icons
+// Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_APP_ICON            ICON                    "resources\\app_icon.ico"
 
@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "kostrushapp" "\0"
+            VALUE "CompanyName", "com.yugas" "\0"
+            VALUE "FileDescription", "kostrush" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "kostrushapp" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "kostrushapp.exe" "\0"
-            VALUE "ProductName", "kostrushapp" "\0"
+            VALUE "InternalName", "kostrush" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 com.yugas. All rights reserved." "\0"
+            VALUE "OriginalFilename", "kostrush.exe" "\0"
+            VALUE "ProductName", "kostrush" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

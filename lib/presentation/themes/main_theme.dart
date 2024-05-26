@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import 'color_theme.dart';
 import 'typography_theme.dart';
 
-/// MainTheme is a class that defines the theme of the application.
+/// Kelas `MainTheme` berisi tema-tema yang digunakan dalam aplikasi.
 class MainTheme {
+  /// Mengembalikan tema cahaya dengan konfigurasi yang telah ditentukan.
+  ///
+  /// [context] - Konteks dari aplikasi.
+  ///
+  /// Tema cahaya mencakup konfigurasi warna, tipografi, dan gaya tombol.
   static ThemeData lightTheme(BuildContext context) {
     return ThemeData.light().copyWith(
+      // Konfigurasi warna
       colorScheme: ThemeData().colorScheme.copyWith(
             primary: ColorsTheme.primaryColor,
             error: ColorsTheme.errorColor,
@@ -16,6 +22,7 @@ class MainTheme {
             primaryContainer: ColorsTheme.primaryColor,
             background: ColorsTheme.neutralColor[1000],
           ),
+      // Konfigurasi tipografi
       textTheme: TypographyTheme.mainTextTheme(context)
           .copyWith(
             labelLarge: TypographyTheme.labelLarge,
@@ -37,12 +44,14 @@ class MainTheme {
           .apply(
             bodyColor: ColorsTheme.neutralColor[100],
           ),
+      // Konfigurasi tema AppBar
       appBarTheme: AppBarTheme(
         centerTitle: true,
         titleTextStyle: TypographyTheme.labelLarge,
         color: ColorsTheme.primaryColor[800],
         foregroundColor: ColorsTheme.neutralColor[1000],
       ),
+      // Konfigurasi tema tombol terisi
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
           textStyle: MaterialStateProperty.all(
@@ -50,6 +59,7 @@ class MainTheme {
           ),
         ),
       ),
+      // Konfigurasi tema tombol teks
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           textStyle: MaterialStateProperty.all(
@@ -60,6 +70,11 @@ class MainTheme {
     );
   }
 
+  /// Mengembalikan tema gelap dengan konfigurasi yang telah ditentukan.
+  ///
+  /// [context] - Konteks dari aplikasi.
+  ///
+  /// Tema gelap hanya menggunakan konfigurasi bawaan dari `ThemeData.dark()`.
   static ThemeData darkTheme(BuildContext context) {
     return ThemeData.dark().copyWith();
   }

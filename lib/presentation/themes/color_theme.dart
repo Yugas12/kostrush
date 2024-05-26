@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-/// Class ini digunakan untuk membuat tema warna
+/// Kelas ColorsTheme berisi kumpulan warna yang digunakan dalam tema aplikasi.
 class ColorsTheme {
   ColorsTheme._();
 
+  /// Warna utama yang digunakan dalam tema aplikasi.
   static MaterialColor primaryColor = const MaterialColor(0xFF3f206c, {
     100: Color(0xFF251340),
     200: Color(0xFF2c164b),
@@ -18,6 +19,7 @@ class ColorsTheme {
     990: Color(0xFFd8d2e1),
   });
 
+  /// Warna sekunder yang digunakan dalam tema aplikasi.
   static MaterialColor secondaryColor = const MaterialColor(0xFFff8f67, {
     100: Color(0xFF7f4733),
     200: Color(0xFF99553d),
@@ -32,6 +34,7 @@ class ColorsTheme {
     990: Color(0xFFffddd1),
   });
 
+  /// Warna yang menunjukkan kesalahan dalam tema aplikasi.
   static MaterialColor errorColor = const MaterialColor(0xFFFF4A4A, {
     100: Color(0xFF4C1616),
     200: Color(0xFF7F2525),
@@ -46,6 +49,7 @@ class ColorsTheme {
     990: Color(0xFFFFECEC),
   });
 
+  /// Warna yang menunjukkan keberhasilan dalam tema aplikasi.
   static MaterialColor successColor = const MaterialColor(0xFF35B79E, {
     100: Color(0xFF15493F),
     200: Color(0xFF1F6D5E),
@@ -60,6 +64,7 @@ class ColorsTheme {
     990: Color(0xFFEAF7f5),
   });
 
+  /// Warna netral yang digunakan dalam tema aplikasi.
   static MaterialColor neutralColor = const MaterialColor(0xFF787579, {
     0: Color(0xFF000000),
     100: Color(0xFF1C1B1F),

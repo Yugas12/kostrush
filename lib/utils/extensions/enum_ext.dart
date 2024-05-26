@@ -5,7 +5,12 @@ import '../../data/enum/gender_enum.dart';
 
 /// Extension ini digunakan untuk memperluas fungsionalitas dari [DormGenderEnum]
 extension DormGenderEnumExtension on DormGenderEnum {
-  /// Mengubah [DormGenderEnum] menjadi [String]
+  
+  /// Mengembalikan nilai string yang sesuai dengan nilai enum.
+  ///
+  /// - `DormGenderEnum.MALE` akan mengembalikan "Putra".
+  /// - `DormGenderEnum.FEMALE` akan mengembalikan "Putri".
+  /// - `DormGenderEnum.UNISEX` akan mengembalikan "Campur".
   String get value {
     switch (this) {
       case DormGenderEnum.MALE:
@@ -19,6 +24,11 @@ extension DormGenderEnumExtension on DormGenderEnum {
 }
 
 extension TransactionStatusEnumExtension on TransactionStatusEnum {
+  /// Mengembalikan nilai string yang sesuai dengan nilai enum.
+  /// 
+  /// - `TransactionStatusEnum.pending` akan mengembalikan "Menunggu".
+  /// - `TransactionStatusEnum.processing` akan mengembalikan "Diproses".
+  /// - `TransactionStatusEnum.done` akan mengembalikan "Selesai".
   String get value {
     switch (this) {
       case TransactionStatusEnum.pending:
@@ -30,6 +40,11 @@ extension TransactionStatusEnumExtension on TransactionStatusEnum {
     }
   }
 
+  /// Mengembalikan pesan yang sesuai dengan nilai enum saat ini.
+  ///
+  /// - [TransactionStatusEnum.pending]: "Terima kasih atas pesanan Anda. Mohon ditunggu beberapa saat untuk proses konfirmasi."
+  /// - [TransactionStatusEnum.processing]: "Transaksi Anda sedang diproses. Harap datang sesuai tanggal pengajuan sewa untuk melakukan pembayaran."
+  /// - [TransactionStatusEnum.done]: "Transaksi Anda telah berhasil. Harap ingat tanggal pengajuan sewa Anda. Terima kasih."
   String get message {
     switch (this) {
       case TransactionStatusEnum.pending:
@@ -43,6 +58,11 @@ extension TransactionStatusEnumExtension on TransactionStatusEnum {
 }
 
 extension GenderEnumExtension on GenderEnum {
+  /// Mengembalikan nilai string yang sesuai dengan nilai enum.
+  ///
+  /// - Jika nilai enum adalah [GenderEnum.Male], maka akan mengembalikan "laki-laki".
+  /// - Jika nilai enum adalah [GenderEnum.Female], maka akan mengembalikan "perempuan".
+  /// - Jika nilai enum tidak sesuai dengan nilai yang ada, maka akan mengembalikan string kosong.
   String get value {
     switch (this) {
       case GenderEnum.Male:

@@ -2,6 +2,8 @@ import '../../../../base/base_argument.dart';
 import '../../../../base/base_controller.dart';
 import '../../../../base/base_state.dart';
 
+/// Kelas `PolicyController` adalah pengontrol untuk tampilan kebijakan.
+/// Kelas ini mengimplementasikan `BaseController` dengan argumen `NoArguments` dan `NoState`.
 class PolicyController extends BaseController<NoArguments, NoState> {
   @override
   void initComponent() {

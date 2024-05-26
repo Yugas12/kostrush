@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/dto/kost_dto.dart';
 import 'package:kostrushapp/data/network/response/kost_response.dart';
 import 'package:kostrushapp/domain/repository/kost_repository.dart';
 import 'package:kostrushapp/presentation/views/location_result/argument/location_result_argument.dart';
@@ -9,8 +10,9 @@ import '../../../../res/routes/app_routes.dart';
 import '../../../../utils/handler/http_error_handler.dart';
 import '../../detail_dormitory/argument/detail_dormitory_argument.dart';
 
+/// Controller untuk tampilan hasil lokasi.
 class LocationResultController
-    extends BaseController<LocationResultArgument, List<KostResponse>> {
+    extends BaseController<LocationResultArgument, List<KostDto>> {
   final _repository = Get.find<KostRepository>();
 
   @override
@@ -35,7 +37,7 @@ class LocationResultController
 
         if (exception.response?.statusCode! != 404 & 400) {
           Get.dialog(AlertDialog(
-            title: Text("Error"),
+            title: const Text("Error"),
             content: Text(
                 HttpErrorHandler.parseErrorResponse(exception.response?.data)),
             actions: [
@@ -43,7 +45,7 @@ class LocationResultController
                 onPressed: () {
                   Get.back();
                 },
-                child: Text("OK"),
+                child: const Text("OK"),
               ),
             ],
           ));
@@ -58,20 +60,23 @@ class LocationResultController
     // TODO: implement disposeComponent
   }
 
+  /// Navigasi ke halaman detail asrama.
+  ///
+  /// [kostId] ID dari kost yang akan ditampilkan detailnya.
   void navigateToDetailDormitory(int? kostId) {
     if (kostId != null) {
       Get.toNamed(AppRoutes.detailDormitory,
           arguments: DetailDormitoryArgument(kostId));
     } else {
       Get.dialog(AlertDialog(
-        title: Text("Error"),
-        content: Text("Data tidak ditemukan"),
+        title: const Text("Error"),
+        content: const Text("Data tidak ditemukan"),
         actions: [
           TextButton(
             onPressed: () {
               Get.back();
             },
-            child: Text("OK"),
+            child: const Text("OK"),
           ),
         ],
       ));

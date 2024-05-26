@@ -7,6 +7,7 @@ import '../../../components/appbar/default_appbar.dart';
 import '../../../components/button/main_button.dart';
 import '../controller/reset_password_controller.dart';
 
+/// Tampilan untuk mengatur ulang kata sandi.
 class ResetPasswordView extends BaseView<ResetPasswordController> {
   const ResetPasswordView({super.key});
 
@@ -23,7 +24,7 @@ class ResetPasswordView extends BaseView<ResetPasswordController> {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          Text("Silahkan masukkan email Anda"),
+          const Text("Silahkan masukkan email Anda"),
           gap(8),
           MainPasswordTextInput(
             controller: controller.passwordController,
@@ -38,6 +39,7 @@ class ResetPasswordView extends BaseView<ResetPasswordController> {
             label: "Lanjut",
             buttonWidth: ButtonWidth.full,
             onTap: () {
+              /// Fungsi untuk menavigasi ke halaman sukses.
               controller.navigateToSuccess();
             },
           )

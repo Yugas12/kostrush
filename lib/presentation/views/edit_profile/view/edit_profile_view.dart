@@ -9,9 +9,17 @@ import '../../../components/appbar/default_appbar.dart';
 import '../../../components/image_view/circle_image.dart';
 import '../controller/edit_profile_controller.dart';
 
+/// Kelas EditProfileView adalah tampilan untuk mengedit profil pengguna.
+/// Kelas ini merupakan turunan dari kelas BaseView dengan parameter tipe EditProfileController.
 class EditProfileView extends BaseView<EditProfileController> {
   const EditProfileView({super.key});
 
+  /// Mengembalikan widget [PreferredSizeWidget] yang digunakan sebagai app bar pada halaman edit profil.
+  ///
+  /// [BuildContext context] - Konteks dari widget yang memanggil method ini.
+  ///
+  /// Mengembalikan [PreferredSizeWidget] yang berisi [DefaultAppBar] dengan judul "Edit Profil".
+  /// Jika tidak ada app bar yang ingin ditampilkan, maka method ini akan mengembalikan `null`.
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return DefaultAppBar(
@@ -19,6 +27,13 @@ class EditProfileView extends BaseView<EditProfileController> {
     );
   }
 
+  /// Widget untuk menampilkan tampilan utama dari halaman edit profil.
+  ///
+  /// [context] Konteks dari widget ini.
+  /// [state] State dari widget ini.
+  ///
+  /// Mengembalikan widget RefreshIndicator yang berisi SingleChildScrollView
+  /// dengan container yang berisi kolom untuk menampilkan gambar profil dan form.
   @override
   Widget body(BuildContext context, state) {
     return RefreshIndicator(
@@ -39,12 +54,13 @@ class EditProfileView extends BaseView<EditProfileController> {
     );
   }
 
+  /// Widget untuk membangun tampilan gambar profil.
   Widget _profileImageBuilder() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         CircleImage.asset(
-          imageAsset: ImageAssetConstant.profileBlank,
+          imageAsset: ImageAssetConstant.blankProfile,
           radius: 50,
         ),
         gap(8),
@@ -52,6 +68,7 @@ class EditProfileView extends BaseView<EditProfileController> {
     );
   }
 
+  /// Widget untuk membangun form.
   Widget _formBuilder() {
     return Column(
       mainAxisSize: MainAxisSize.min,

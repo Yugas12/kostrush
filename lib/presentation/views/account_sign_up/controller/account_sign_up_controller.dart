@@ -10,8 +10,8 @@ import '../../../../data/enum/otp_purpose_enum.dart';
 import '../../../../utils/handler/http_error_handler.dart';
 import '../../success/argument/success_argument.dart';
 
-class AccountSignUpController
-    extends BaseController<AccountSignUpArgument, NoState> {
+/// Controller untuk tampilan pendaftaran akun.
+class AccountSignUpController extends BaseController<AccountSignUpArgument, NoState> {
   final _repository = Get.find<AuthRepository>();
 
   late TextEditingController emailController;
@@ -42,6 +42,7 @@ class AccountSignUpController
     confirmPasswordController.dispose();
   }
 
+  /// Method untuk melakukan registrasi akun.
   void register() async {
     if (emailController.text.isEmpty) {
       Get.dialog(

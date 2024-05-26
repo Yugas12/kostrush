@@ -7,6 +7,7 @@ import '../../../../../../data/enum/transaction_status_enum.dart';
 import '../../../../../components/appbar/default_appbar.dart';
 import '../controller/transaction_controller.dart';
 
+/// Widget yang menampilkan daftar transaksi.
 class TransactionView extends BaseView<TransactionController> {
   const TransactionView({super.key});
 
@@ -22,7 +23,7 @@ class TransactionView extends BaseView<TransactionController> {
     return RefreshIndicator(
       onRefresh: onRefresh,
       child: ListView.separated(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         itemCount: controller.state?.length ?? 0,
         separatorBuilder: (context, index) => gap(8),
         itemBuilder: (context, index) {
@@ -30,10 +31,11 @@ class TransactionView extends BaseView<TransactionController> {
 
           return TransactionCard(
             name: transaksi?.kost?.name ?? "",
-            address: transaksi?.roomName ?? "",
+            address: transaksi?.kost?.address ?? "",
             price: transaksi?.total ?? 0,
             status: transaksi?.status ?? TransactionStatusEnum.pending,
             onTap: () {
+              /// Navigasi ke halaman detail transaksi.
               controller.navigateToDetailTransaction(index);
             },
           );

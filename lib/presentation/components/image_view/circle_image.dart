@@ -8,6 +8,7 @@ import 'package:logger/logger.dart';
 
 import '../../themes/color_theme.dart';
 
+/// Widget untuk menampilkan gambar dalam bentuk lingkaran.
 class CircleImage extends StatelessWidget {
   const CircleImage({
     super.key,
@@ -22,6 +23,25 @@ class CircleImage extends StatelessWidget {
   final double? borderWidth;
   final Widget child;
 
+  /// Membuat widget gambar lingkaran dengan menggunakan gambar dari URL.
+  ///
+  /// [imageEndpoint] adalah endpoint dari gambar yang akan ditampilkan.
+  /// [radius] adalah jari-jari dari gambar lingkaran (default: 24.0).
+  /// [borderWidth] adalah lebar border gambar lingkaran (opsional).
+  ///
+  /// Contoh penggunaan:
+  /// ```dart
+  /// CircleImage.network(
+  ///   imageEndpoint: 'https://example.com/image.jpg',
+  ///   radius: 32.0,
+  ///   borderWidth: 2.0,
+  /// )
+  /// ```
+  ///factory CircleImage.network({
+  ///  required String imageEndpoint,
+  ///  double radius = 24.0,
+  ///  double? borderWidth,
+  /// })
   factory CircleImage.network({
     required String imageEndpoint,
     double radius = 24.0,
@@ -75,6 +95,20 @@ class CircleImage extends StatelessWidget {
     );
   }
 
+  /// Membuat widget gambar lingkaran dengan menggunakan asset gambar.
+  ///
+  /// [imageAsset] merupakan path dari asset gambar yang akan ditampilkan.
+  /// [radius] merupakan ukuran radius dari gambar lingkaran (default: 24.0).
+  /// [borderWidth] merupakan lebar border gambar lingkaran (opsional).
+  ///
+  /// Contoh penggunaan:
+  /// ```dart
+  /// CircleImage.asset(
+  ///   imageAsset: 'assets/images/profile.png',
+  ///   radius: 32.0,
+  ///   borderWidth: 2.0,
+  /// )
+  /// ```
   factory CircleImage.asset({
     required String imageAsset,
     double radius = 24.0,
@@ -98,6 +132,20 @@ class CircleImage extends StatelessWidget {
     );
   }
 
+  /// Membuat widget gambar lingkaran dari file gambar.
+  ///
+  /// [imageFile] merupakan path dari file gambar yang akan ditampilkan.
+  /// [radius] merupakan ukuran radius lingkaran gambar. Defaultnya adalah 24.0.
+  /// [borderWidth] merupakan lebar border gambar. Jika tidak ditentukan, maka tidak akan ada border.
+  ///
+  /// Contoh penggunaan:
+  /// ```dart
+  /// CircleImage.file(
+  ///   imageFile: 'path/to/image.jpg',
+  ///   radius: 32.0,
+  ///   borderWidth: 2.0,
+  /// )
+  /// ```
   factory CircleImage.file({
     required String imageFile,
     double radius = 24.0,
@@ -121,7 +169,6 @@ class CircleImage extends StatelessWidget {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return borderWidth != null ? _borderBuilder() : _baseBuilder();
@@ -140,6 +187,7 @@ class CircleImage extends StatelessWidget {
     );
   }
 
+  /// Widget untuk membangun gambar dengan bentuk lingkaran.
   Widget _baseBuilder() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius),

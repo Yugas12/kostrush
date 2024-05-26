@@ -14,10 +14,15 @@ import '../../../../res/painter/dash_line_painter.dart';
 import '../../../components/appbar/default_appbar.dart';
 import '../controller/order_form_controller.dart';
 
-class OrderFormView extends BaseView<OrderFormController>
-    with CustomSliverMixin {
+/// FILEPATH: /B:/kostrush/lib/presentation/views/order_form/view/order_form_view.dart
+/// 
+/// Kelas [OrderFormView] adalah tampilan untuk formulir pemesanan.
+/// Kelas ini mengimplementasikan [BaseView] dan [CustomSliverMixin].
+class OrderFormView extends BaseView<OrderFormController> with CustomSliverMixin {
   const OrderFormView({super.key});
 
+  /// Mengoverride method [appBar] untuk mengatur tampilan app bar.
+  /// Method ini mengembalikan [PreferredSizeWidget] yang berisi [DefaultAppBar].
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return DefaultAppBar(
@@ -25,6 +30,8 @@ class OrderFormView extends BaseView<OrderFormController>
     );
   }
 
+  /// Mengoverride method [body] untuk mengatur tampilan body.
+  /// Method ini mengembalikan [Column] yang berisi beberapa widget seperti [RefreshIndicator], [CustomScrollView], dan widget-widget lainnya.
   @override
   Widget body(BuildContext context, state) {
     return Column(
@@ -57,6 +64,8 @@ class OrderFormView extends BaseView<OrderFormController>
     );
   }
 
+  /// Method [_formBuilder] digunakan untuk mengatur tampilan form pemesanan.
+  /// Method ini mengembalikan [Container] yang berisi beberapa widget seperti [Text] dan [MainTextInput].
   Widget _formBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -87,6 +96,8 @@ class OrderFormView extends BaseView<OrderFormController>
     );
   }
 
+  /// Method [_documentPickerBuilder] digunakan untuk mengatur tampilan pemilihan dokumen.
+  /// Method ini mengembalikan [Container] yang berisi beberapa widget seperti [Text], [_documentPicker], dan [Material].
   Widget _documentPickerBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -128,6 +139,8 @@ class OrderFormView extends BaseView<OrderFormController>
     );
   }
 
+  /// Method [_timePickerBuilder] digunakan untuk mengatur tampilan pemilihan tanggal sewa dan durasi sewa.
+  /// Method ini mengembalikan [Container] yang berisi beberapa widget seperti [Text] dan [MainTextInput].
   Widget _timePickerBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -165,6 +178,8 @@ class OrderFormView extends BaseView<OrderFormController>
     );
   }
 
+  /// Method [_summaryBuilder] digunakan untuk mengatur tampilan ringkasan biaya sewa.
+  /// Method ini mengembalikan [Container] yang berisi beberapa widget seperti [Text] dan [Row].
   Widget _summaryBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -178,20 +193,21 @@ class OrderFormView extends BaseView<OrderFormController>
           gap(16),
           Row(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Harga Sewa",
-                    style: TypographyTheme.bodyMedium,
-                  ),
-                  Text(
-                    "Pemabayaran diakukan secara tunai",
-                    style: TypographyTheme.bodySmall,
-                  )
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Harga Sewa",
+                      style: TypographyTheme.bodyMedium,
+                    ),
+                    Text(
+                      "Pemabayaran diakukan secara tunai",
+                      style: TypographyTheme.bodySmall,
+                    )
+                  ],
+                ),
               ),
-              const Spacer(),
               Text(
                 controller.price.value.toRupiah(),
                 style: TypographyTheme.labelMedium,
@@ -227,6 +243,8 @@ class OrderFormView extends BaseView<OrderFormController>
     );
   }
 
+  /// Method [_bottomButtonBuilder] digunakan untuk mengatur tampilan tombol "Ajukan Sewa".
+  /// Method ini mengembalikan [Container] yang berisi [MainButton].
   Widget _bottomButtonBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -240,6 +258,8 @@ class OrderFormView extends BaseView<OrderFormController>
     );
   }
 
+  /// Method [_documentPicker] digunakan untuk mengatur tampilan pemilihan dokumen.
+  /// Method ini mengembalikan [Container] yang berisi beberapa widget seperti [Text], [_unselectedDocument], dan [_documentImage].
   Widget _documentPicker() {
     return Container(
       child: Column(
@@ -255,6 +275,8 @@ class OrderFormView extends BaseView<OrderFormController>
     );
   }
 
+  /// Method [_unselectedDocument] digunakan untuk mengatur tampilan ketika dokumen belum dipilih.
+  /// Method ini mengembalikan [InkWell] yang berisi [Container] dan [Text].
   Widget _unselectedDocument() {
     return InkWell(
       onTap: controller.launchGallery,
@@ -305,6 +327,8 @@ class OrderFormView extends BaseView<OrderFormController>
     );
   }
 
+  /// Method [_documentImage] digunakan untuk mengatur tampilan ketika dokumen sudah dipilih.
+  /// Method ini mengembalikan [Column] yang berisi [Container], [MainButton.icon], dan [Text].
   Widget _documentImage() {
     return Column(
       children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/dto/kost_dto.dart';
 import 'package:kostrushapp/data/network/response/kost_response.dart';
 import 'package:kostrushapp/domain/repository/kost_repository.dart';
 import 'package:kostrushapp/presentation/views/detail_dormitory/argument/detail_dormitory_argument.dart';
@@ -10,8 +11,8 @@ import '../../../../res/routes/app_routes.dart';
 import '../../../../utils/handler/http_error_handler.dart';
 import '../../order_form/argument/order_form_argument.dart';
 
-class DetailDormitoryController
-    extends BaseController<DetailDormitoryArgument, KostResponse> {
+/// Controller untuk halaman detail asrama.
+class DetailDormitoryController extends BaseController<DetailDormitoryArgument, KostDto> {
   late PageController pageController;
 
   final _repository = Get.find<KostRepository>();
@@ -69,24 +70,29 @@ class DetailDormitoryController
     currentIndex.close();
   }
 
+  /// Callback yang dipanggil ketika halaman berubah.
   void onPageChanged(int index) {
     currentIndex.value = index;
   }
 
+  /// Pindah ke halaman berikutnya.
   void nextPage() {
     pageController.nextPage(
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
+  /// Pindah ke halaman sebelumnya.
   void previousPage() {
     pageController.previousPage(
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
+  /// Navigasi ke halaman formulir pemesanan.
   void navigateToOrderForm() {
     Get.toNamed(AppRoutes.orderForm,
         arguments: OrderFormArgument(
           kostId: arguments.id,
+          roomId: state?.rooms?[0].id ?? 0,
         ));
   }
 }

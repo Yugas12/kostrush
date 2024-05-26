@@ -9,6 +9,7 @@ import '../../../../../../res/assets/image_asset_constant.dart';
 import '../../../../../components/appbar/default_appbar.dart';
 import '../controller/profile_controller.dart';
 
+/// Widget untuk tampilan profil pengguna.
 class ProfileView extends BaseView<ProfileController> {
   const ProfileView({super.key});
 
@@ -47,6 +48,7 @@ class ProfileView extends BaseView<ProfileController> {
     );
   }
 
+  /// Widget untuk membangun tampilan profil pengguna.
   Widget _profileBuilder() {
     return Container(
       padding: const EdgeInsets.all(16.0),
@@ -56,7 +58,7 @@ class ProfileView extends BaseView<ProfileController> {
           mainAxisSize: MainAxisSize.min,
           children: [
             CircleImage.asset(
-              imageAsset: ImageAssetConstant.profileBlank,
+              imageAsset: ImageAssetConstant.blankProfile,
               radius: 50,
             ),
             gap(8),
@@ -74,6 +76,7 @@ class ProfileView extends BaseView<ProfileController> {
     );
   }
 
+  /// Widget untuk pengaturan profil pengguna.
   Widget _profileSetting() {
     return Container(
       padding: const EdgeInsets.all(16.0),
@@ -110,6 +113,7 @@ class ProfileView extends BaseView<ProfileController> {
     );
   }
 
+  /// Widget untuk pengaturan lainnya.
   Widget _otherSetting() {
     return Container(
       padding: const EdgeInsets.all(16.0),
@@ -146,6 +150,7 @@ class ProfileView extends BaseView<ProfileController> {
     );
   }
 
+  /// Widget untuk item pengaturan profil.
   Widget _profileSettingItem({
     required String title,
     required Function() onTap,

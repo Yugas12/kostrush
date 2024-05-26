@@ -8,6 +8,7 @@ import '../../../components/button/main_button.dart';
 import '../../../components/input/main_text_input.dart';
 import '../controller/account_sign_up_controller.dart';
 
+/// Widget untuk tampilan pendaftaran akun.
 class AccountSignUpView extends BaseView<AccountSignUpController> {
   const AccountSignUpView({super.key});
 
@@ -41,6 +42,7 @@ class AccountSignUpView extends BaseView<AccountSignUpController> {
     );
   }
 
+  /// Membangun form pendaftaran akun.
   Widget _formBuilder() {
     return Form(
       child: Column(

@@ -8,17 +8,17 @@ part of 'transaction_response.dart';
 
 TransactionResponse _$TransactionResponseFromJson(Map<String, dynamic> json) =>
     TransactionResponse(
-      id: (json['id_transaksi'] as num?)?.toInt(),
-      roomId: (json['id_kamar'] as num?)?.toInt(),
+      id: json['id_transaksi'],
+      roomId: json['id_kamar'],
       roomName: json['nama_kamar'] as String?,
-      total: (json['biaya'] as num?)?.toInt(),
+      total: json['biaya'] as String?,
       checkIn: json['tanggal_masuk'] == null
           ? null
           : DateTime.parse(json['tanggal_masuk'] as String),
       checkOut: json['tanggal_keluar'] == null
           ? null
           : DateTime.parse(json['tanggal_keluar'] as String),
-      duration: (json['durasi'] as num?)?.toInt(),
+      duration: json['durasi'],
       status: $enumDecodeNullable(
           _$TransactionStatusEnumEnumMap, json['status_transaksi']),
       user: json['user'] == null

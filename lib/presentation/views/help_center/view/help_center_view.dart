@@ -7,6 +7,7 @@ import '../../../components/appbar/default_appbar.dart';
 import '../../../components/button/main_button.dart';
 import '../controller/help_center_controller.dart';
 
+/// Widget untuk tampilan Pusat Bantuan.
 class HelpCenterView extends BaseView<HelpCenterController> {
   const HelpCenterView({super.key});
 

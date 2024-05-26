@@ -1,6 +1,6 @@
 {
-    "name": "kostrushapp",
-    "short_name": "kostrushapp",
+    "name": "kostrush",
+    "short_name": "kostrush",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

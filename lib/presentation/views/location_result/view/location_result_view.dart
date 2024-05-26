@@ -5,6 +5,7 @@ import '../../../components/appbar/default_appbar.dart';
 import '../../../components/card/dorm_card.dart';
 import '../controller/location_result_controller.dart';
 
+/// Widget untuk menampilkan hasil pencarian lokasi.
 class LocationResultView extends BaseView<LocationResultController> {
   const LocationResultView({super.key});
 
@@ -35,9 +36,9 @@ class LocationResultView extends BaseView<LocationResultController> {
                 return Center(
                   child: DormCard(
                     type: kost?.type ?? "",
-                    price: kost?.startPrice ?? 0,
-                    name: kost?.name ?? "",
-                    address: kost?.address ?? "",
+                    price: kost!.startPrice ?? 0,
+                    name: kost.name ?? "",
+                    address: kost.address ?? "",
                     onTap: () {
                       controller.navigateToDetailDormitory(kost?.id);
                     },

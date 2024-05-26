@@ -10,7 +10,22 @@ class ApplicationUseCase with PermissionServices {
   final _logger = Get.find<Logger>();
   final _storage = Get.find<StoragePreference>();
 
-  /// Fungsi ini buat menghandle permission camera dan gallery
+  /// Menghandle izin kamera dan galeri.
+  /// 
+  /// Fungsi ini akan meminta izin kamera dan galeri menggunakan fungsi [requestCameraGalleryPermission].
+  /// Jika izin kamera diberikan, fungsi akan mengembalikan nilai `true`.
+  /// Jika izin kamera ditolak, fungsi akan mengembalikan nilai `false`.
+  /// 
+  /// Contoh penggunaan:
+  /// 
+  /// ```dart
+  /// bool result = await handleCameraGalleryPermission();
+  /// if (result) {
+  ///   // Izin kamera diberikan
+  /// } else {
+  ///   // Izin kamera ditolak
+  /// }
+  /// ```
   Future<bool> handleCameraGalleryPermission() async {
     var permissions = await requestCameraGalleryPermission();
 
@@ -25,6 +40,12 @@ class ApplicationUseCase with PermissionServices {
     return false;
   }
 
+  /// Fungsi ini digunakan untuk memeriksa apakah pengguna sudah masuk atau belum.
+  /// 
+  /// Fungsi ini akan mengambil token sesi dari penyimpanan aman dan memeriksa apakah token tersebut tidak null dan tidak kosong.
+  /// Jika token tidak null dan tidak kosong, maka pengguna dianggap sudah masuk.
+  /// 
+  /// Returns `true` jika pengguna sudah masuk, `false` jika pengguna belum masuk.
   Future<bool> isUserLoggedIn() async {
     final token = await _storage.readSecureData(StorageConstant.sessionToken);
     return token != null && token.isNotEmpty;

@@ -9,6 +9,7 @@ enum PrefixIcon { none, icon }
 
 enum ButtonWidth { full, wrap }
 
+/// Widget tombol utama yang digunakan dalam aplikasi.
 class MainButton extends StatelessWidget {
   const MainButton({
     super.key,
@@ -33,6 +34,17 @@ class MainButton extends StatelessWidget {
   final TextStyle? textStyle;
   final double? borderRadius;
 
+  /// Membuat tombol utama dengan ikon.
+  ///
+  /// [label] adalah teks yang ditampilkan pada tombol.
+  /// [onTap] adalah fungsi yang akan dipanggil ketika tombol ditekan.
+  /// [color] adalah warna latar belakang tombol.
+  /// [icon] adalah widget ikon yang ditampilkan di sebelah teks tombol.
+  /// [buttonType] adalah jenis tombol yang akan ditampilkan.
+  /// [buttonWidth] adalah lebar tombol.
+  /// [textStyle] adalah gaya teks yang akan diterapkan pada teks tombol.
+  ///
+  /// Mengembalikan instance dari [MainButton] dengan konfigurasi yang diberikan.
   factory MainButton.icon({
     required String label,
     Function()? onTap,

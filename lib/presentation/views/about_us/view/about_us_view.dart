@@ -7,6 +7,7 @@ import '../../../../base/base_view.dart';
 import '../../../components/appbar/default_appbar.dart';
 import '../controller/about_us_controller.dart';
 
+/// Widget untuk tampilan "Tentang Kami".
 class AboutUsView extends BaseView<AboutUsController> {
   const AboutUsView({super.key});
 

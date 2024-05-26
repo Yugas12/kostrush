@@ -5,6 +5,7 @@ import 'package:kostrushapp/presentation/themes/color_theme.dart';
 import 'package:kostrushapp/presentation/themes/typography_theme.dart';
 import 'package:kostrushapp/utils/extensions/base_view_ext.dart';
 import 'package:kostrushapp/utils/extensions/int_ext.dart';
+import 'package:kostrushapp/utils/extensions/string_ext.dart';
 import 'package:kostrushapp/utils/mixins/custom_sliver_mixin.dart';
 
 import '../../../../base/base_view.dart';
@@ -12,10 +13,12 @@ import '../../../components/appbar/default_appbar.dart';
 import '../../../components/chip/tag_chip.dart';
 import '../controller/detail_dormitory_controller.dart';
 
+/// Widget untuk tampilan detail asrama.
 class DetailDormitoryView extends BaseView<DetailDormitoryController>
     with CustomSliverMixin {
   const DetailDormitoryView({super.key});
 
+  /// Mengembalikan widget [PreferredSizeWidget] yang akan digunakan sebagai app bar.
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return DefaultAppBar(
@@ -23,6 +26,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
     );
   }
 
+  /// Mengembalikan widget [Widget] yang akan digunakan sebagai body.
   @override
   Widget body(BuildContext context, state) {
     return Column(
@@ -55,6 +59,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
     );
   }
 
+  /// Mengembalikan widget [Widget] yang akan digunakan untuk menampilkan gambar asrama.
   Widget _imageBuilder() {
     return SizedBox(
       height: 240,
@@ -70,6 +75,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
     );
   }
 
+  /// Mengembalikan widget [Widget] yang akan digunakan untuk menampilkan overview asrama.
   Widget _overviewBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -117,6 +123,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
     );
   }
 
+  /// Mengembalikan widget [Widget] yang akan digunakan untuk menampilkan deskripsi asrama.
   Widget _descriptionBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -134,6 +141,7 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
     );
   }
 
+  /// Mengembalikan widget [Widget] yang akan digunakan untuk menampilkan peraturan asrama.
   Widget _rulesDescriptionBuilder() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -350,43 +358,6 @@ class DetailDormitoryView extends BaseView<DetailDormitoryController>
           controller.navigateToOrderForm();
         },
       ),
-      // child: Row(
-      //   children: [
-      //     IconButton(
-      //       onPressed: () {},
-      //       style: ButtonStyle(
-      //         padding: MaterialStateProperty.all(
-      //           const EdgeInsets.all(8),
-      //         ),
-      //         minimumSize: MaterialStateProperty.all(
-      //           const Size(64, 48),
-      //         ),
-      //         side: MaterialStateProperty.all(
-      //           BorderSide(color: ColorsTheme.primaryColor),
-      //         ),
-      //         shape: MaterialStateProperty.all(
-      //           RoundedRectangleBorder(
-      //             borderRadius: BorderRadius.circular(8),
-      //           ),
-      //         ),
-      //       ),
-      //       icon: FaIcon(
-      //         FontAwesomeIcons.whatsapp,
-      //         color: ColorsTheme.primaryColor,
-      //       ),
-      //     ),
-      //     gap(8),
-      //     Expanded(
-      //       child: MainButton(
-      //         label: "Ajukan Sewa",
-      //         buttonWidth: ButtonWidth.full,
-      //         onTap: () {
-      //           controller.navigateToOrderForm();
-      //         },
-      //       ),
-      //     )
-      //   ],
-      // ),
     );
   }
 

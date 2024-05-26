@@ -5,8 +5,8 @@ import 'package:kostrushapp/utils/extensions/base_controller_ext.dart';
 import '../../../../base/base_controller.dart';
 import '../../../../base/base_state.dart';
 
-class DurationSelectorController
-    extends BaseController<DurationSelectorArgument, NoState> {
+/// Controller untuk tampilan pemilih durasi.
+class DurationSelectorController extends BaseController<DurationSelectorArgument, NoState> {
   Rxn<DurationItem> selectedDuration = Rxn<DurationItem>();
 
   List<DurationItem> durations = [
@@ -43,11 +43,13 @@ class DurationSelectorController
     selectedDuration.close();
   }
 
+  /// Memilih item durasi berdasarkan indeks.
   void selectItem(int index) {
     selectedDuration.value = durations[index];
     backWithData();
   }
 
+  /// Kembali ke halaman sebelumnya dengan membawa data durasi yang dipilih.
   void backWithData() {
     Get.back(
         result: DurationSelectorArgument(duration: selectedDuration.value));

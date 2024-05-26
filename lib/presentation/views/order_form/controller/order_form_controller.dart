@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/dto/kost_dto.dart';
 import 'package:kostrushapp/data/network/response/kost_response.dart';
 import 'package:kostrushapp/domain/repository/transaction_repository.dart';
 import 'package:kostrushapp/presentation/views/duration_selector/argument/duration_selector_argument.dart';
@@ -19,8 +20,9 @@ import '../../../../utils/handler/http_error_handler.dart';
 import '../../../components/focus_node/no_focus_node.dart';
 import '../../success/argument/success_argument.dart';
 
+/// Controller untuk halaman formulir pemesanan.
 class OrderFormController
-    extends BaseController<OrderFormArgument, KostResponse>
+    extends BaseController<OrderFormArgument, KostDto>
     with CameraGalleryService {
   final _repository = Get.find<TransactionRepository>();
   final _profileRepository = Get.find<ProfileRepository>();
@@ -38,6 +40,7 @@ class OrderFormController
   Rxn<DateTime> selectedDate = Rxn<DateTime>();
   Rxn<DurationItem> selectedDuration = Rxn<DurationItem>();
   RxInt price = 0.obs;
+  RxBool isAlreadyClicked = false.obs;
 
   @override
   void initComponent() {
@@ -78,7 +81,7 @@ class OrderFormController
       (exception) {
         emitError(exception.message);
         Get.dialog(AlertDialog(
-          title: Text("Error"),
+          title: const Text("Error"),
           content: Text(
               HttpErrorHandler.parseErrorResponse(exception.response?.data)),
           actions: [
@@ -86,7 +89,7 @@ class OrderFormController
               onPressed: () {
                 Get.back();
               },
-              child: Text("OK"),
+              child: const Text("OK"),
             ),
           ],
         ));
@@ -115,8 +118,10 @@ class OrderFormController
     selectedDuration.value = null;
     selectedDuration.close();
     price.close();
+    isAlreadyClicked.close();
   }
 
+  /// Membuka galeri untuk memilih gambar.
   void launchGallery() async {
     openGallery(
         isPermissionGranted: await requestCameraGalleryPermissions(),
@@ -128,6 +133,7 @@ class OrderFormController
         });
   }
 
+  /// Menampilkan dialog untuk memilih tanggal.
   void pickDate(BuildContext context) {
     showDatePicker(
       context: context,
@@ -143,6 +149,7 @@ class OrderFormController
     });
   }
 
+  /// Navigasi ke halaman pemilih durasi.
   void navigateToDurationSelector() async {
     var result = await Get.toNamed(
       AppRoutes.selectDuration,
@@ -160,12 +167,20 @@ class OrderFormController
 
       logger.d("Result: ${result.duration?.duration}");
 
-      price.value = (state?.startPrice ?? 0) * selectedDuration.value!.value;
+      price.value = (state!.startPrice ?? 0) * selectedDuration.value!.value;
     }
   }
 
+  /// Mengirimkan pesanan.
   void submitOrder() async {
+
+    if(isAlreadyClicked.value) {
+      return;
+    }
+
+
     if (selectedFile.value == null) {
+      isAlreadyClicked.value = false;
       Get.dialog(
         AlertDialog(
           title: const Text("Error"),
@@ -183,7 +198,9 @@ class OrderFormController
       return;
     }
 
+    /// Memeriksa apakah tanggal sudah dipilih.
     if (selectedDate.value == null) {
+      isAlreadyClicked.value = false;
       Get.dialog(
         AlertDialog(
           title: const Text("Error"),
@@ -201,7 +218,9 @@ class OrderFormController
       return;
     }
 
+    /// Memeriksa apakah durasi sudah dipilih.
     if (selectedDuration.value == null) {
+      isAlreadyClicked.value = false;
       Get.dialog(
         AlertDialog(
           title: const Text("Error"),
@@ -219,8 +238,13 @@ class OrderFormController
       return;
     }
 
+
+    isAlreadyClicked.value = true;
+
+    /// Mengirim data transaksi ke server.
     final result = await _repository.createTransaction(
       kostId: arguments.kostId,
+      roomId: arguments.roomId,
       price: price.value,
       date: selectedDate.value!,
       duration: selectedDuration.value!.value,
@@ -229,8 +253,9 @@ class OrderFormController
 
     result.fold(
       (exception) {
+        /// Menampilkan dialog error.
         Get.dialog(AlertDialog(
-          title: Text("Error"),
+          title: const Text("Error"),
           content: Text(
               HttpErrorHandler.parseErrorResponse(exception.response?.data)),
           actions: [
@@ -238,17 +263,19 @@ class OrderFormController
               onPressed: () {
                 Get.back();
               },
-              child: Text("OK"),
+              child: const Text("OK"),
             ),
           ],
         ));
       },
       (data) {
+        /// Navigasi ke halaman sukses.
         navigateToSuccess();
       },
     );
   }
 
+  /// Navigasi ke halaman sukses.
   void navigateToSuccess() {
     Get.toNamed(
       AppRoutes.success,

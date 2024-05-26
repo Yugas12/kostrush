@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kostrushapp/data/dto/profile_dto.dart';
 import 'package:kostrushapp/data/network/response/profile_response.dart';
 import 'package:kostrushapp/domain/repository/profile_repository.dart';
 import 'package:kostrushapp/presentation/views/change_password/argument/change_password_argument.dart';
@@ -9,8 +10,8 @@ import '../../../../res/routes/app_routes.dart';
 import '../../../../utils/handler/http_error_handler.dart';
 import '../../success/argument/success_argument.dart';
 
-class ChangePasswordController
-    extends BaseController<ChangePasswordArgument, ProfileResponse> {
+/// Controller untuk halaman perubahan kata sandi.
+class ChangePasswordController extends BaseController<ChangePasswordArgument, ProfileDto> {
   final _repository = Get.find<ProfileRepository>();
 
   late TextEditingController newPasswordController;
@@ -38,9 +39,9 @@ class ChangePasswordController
     newPasswordController.dispose();
   }
 
+  /// Fungsi untuk mengubah kata sandi.
   void changePassword() async {
-    if (newPasswordController.text.isEmpty ||
-        newRePasswordController.text.isEmpty) {
+    if (newPasswordController.text.isEmpty || newRePasswordController.text.isEmpty) {
       Get.dialog(AlertDialog(
         title: Text("Error"),
         content: Text("Password tidak boleh kosong"),
@@ -80,8 +81,7 @@ class ChangePasswordController
       emitError(exception.toString());
       Get.dialog(AlertDialog(
         title: Text("Error"),
-        content:
-            Text(HttpErrorHandler.parseErrorResponse(exception.response?.data)),
+        content: Text(HttpErrorHandler.parseErrorResponse(exception.response?.data)),
         actions: [
           TextButton(
             onPressed: () {
@@ -97,8 +97,7 @@ class ChangePasswordController
         arguments: SuccessArgument(
           context: arguments.context,
           title: "Kata Sandi Berhasil Diubah",
-          description:
-              "Jangan pernah membagikan kata sandi Anda kepada siapa pun.",
+          description: "Jangan pernah membagikan kata sandi Anda kepada siapa pun.",
           buttonText: "Kembali ke Halaman Login",
         ),
       );

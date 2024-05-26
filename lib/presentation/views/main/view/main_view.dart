@@ -4,6 +4,8 @@ import 'package:kostrushapp/presentation/components/icon_data/kost_rush_app_icon
 import 'package:kostrushapp/presentation/themes/color_theme.dart';
 import 'package:kostrushapp/presentation/views/main/controller/main_controller.dart';
 
+/// Widget untuk tampilan utama aplikasi.
+/// Menampilkan tampilan beranda, transaksi, dan profil.
 class MainView extends GetView<MainController> {
   const MainView({super.key});
 

@@ -10,7 +10,7 @@ enum MainTextInputValidator { none, email, password, phone, number }
 
 enum MainTextInputBorderStyle { defaultStyle, fullRounded }
 
-/// MainTextInput digunakan untuk membuat input text
+/// Widget untuk input teks utama.
 class MainTextInput extends StatelessWidget {
   const MainTextInput({
     super.key,
@@ -104,7 +104,24 @@ class MainTextInput extends StatelessWidget {
     );
   }
 
-  /// Membuat validator sesuai dengan MainTextInputValidator
+  
+  /// Fungsi untuk membangun validator berdasarkan jenis validator yang diberikan.
+  /// 
+  /// Mengembalikan fungsi yang menerima sebuah nilai dan mengembalikan pesan kesalahan jika nilai tidak valid.
+  /// 
+  /// Jenis validator yang didukung:
+  /// - [MainTextInputValidator.email]: Validator untuk memvalidasi email.
+  /// - [MainTextInputValidator.password]: Validator untuk memvalidasi kata sandi.
+  /// - [MainTextInputValidator.phone]: Validator untuk memvalidasi nomor telepon.
+  /// 
+  /// Contoh penggunaan:
+  /// ```dart
+  /// String? Function(String?) validator = _validatorBuilder();
+  /// String? errorMessage = validator('example@example.com');
+  /// if (errorMessage != null) {
+  ///   print(errorMessage);
+  /// }
+  /// ```
   String? Function(String?) _validatorBuilder() {
     switch (validator) {
       case MainTextInputValidator.email:
@@ -151,7 +168,10 @@ class MainTextInput extends StatelessWidget {
     }
   }
 
-  /// Mengembalikan nilai borderRadius sesuai dengan borderStyle
+  /// Mengembalikan nilai borderRadius sesuai dengan borderStyle yang ditentukan.
+  ///
+  /// Jika borderStyle adalah MainTextInputBorderStyle.fullRounded, maka nilai yang dikembalikan adalah 100.
+  /// Jika tidak, maka nilai yang dikembalikan adalah 8.
   double _borderRadius() {
     switch (borderStyle) {
       case MainTextInputBorderStyle.fullRounded:
@@ -161,7 +181,10 @@ class MainTextInput extends StatelessWidget {
     }
   }
 
-  /// Membuat prefixIcon sesuai dengan prefixIcon atau prefixWidget
+  /// Method untuk membangun widget ikon awalan (_prefixIconBuilder).
+  /// Jika [prefixWidget] tidak null, maka akan mengembalikan [prefixWidget].
+  /// Jika [prefixIcon] tidak null, maka akan mengembalikan [IconButton] dengan [prefixIcon].
+  /// Jika [prefixIcon] null, maka akan mengembalikan null.
   Widget? _prefixIconBuilder() {
     return prefixWidget ??
         (prefixIcon != null
@@ -175,7 +198,11 @@ class MainTextInput extends StatelessWidget {
             : null);
   }
 
-  /// Membuat suffixIcon sesuai dengan suffixIcon atau suffixWidget
+  /// Method untuk membangun widget ikon di sebelah kanan input teks utama.
+  ///
+  /// Jika [suffixWidget] tidak null, maka akan mengembalikan [suffixWidget].
+  /// Jika [suffixIcon] tidak null, maka akan mengembalikan [IconButton] dengan [suffixIcon].
+  /// Jika [suffixIcon] null, maka akan mengembalikan null.
   Widget? _suffixIconBuilder() {
     return suffixWidget ??
         (suffixIcon != null
@@ -189,7 +216,18 @@ class MainTextInput extends StatelessWidget {
             : null);
   }
 
-  /// Membuat TextFormField sesuai dengan parameter yang diberikan
+  /// Widget untuk membangun input teks utama.
+  ///
+  /// Widget ini menggunakan TextFormField untuk menghasilkan input teks dengan berbagai konfigurasi seperti inputFormatters,
+  /// showCursor, focusNode, controller, keyboardType, onChanged, obscureText, maxLines, minLines, maxLength, onFieldSubmitted,
+  /// cursorColor, autofillHints, validator, enabled, onTap, style, decoration, dan lain-lain.
+  ///
+  /// Contoh penggunaan:
+  /// ```dart
+  /// Widget _buildTextInput() => TextFormField(
+  ///   // konfigurasi input teks
+  /// );
+  /// ```
   Widget _buildTextInput() => TextFormField(
         inputFormatters: inputFormatters,
         showCursor: true,

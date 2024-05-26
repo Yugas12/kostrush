@@ -1,3 +1,4 @@
+/// Model data untuk profil pengguna.
 class ProfileModel {
   final int id;
   final String? name;
@@ -8,6 +9,7 @@ class ProfileModel {
   final String? gender;
   final String? occupation;
 
+  /// Konstruktor untuk membuat objek ProfileModel.
   ProfileModel({
     required this.id,
     this.name,
@@ -19,6 +21,7 @@ class ProfileModel {
     this.occupation,
   });
 
+  /// Mengonversi objek ProfileModel menjadi Map.
   Map<String, Object?> toMap() => {
         'id': id,
         'name': name,
@@ -30,6 +33,7 @@ class ProfileModel {
         'occupation': occupation,
       };
 
+  /// Membuat objek ProfileModel dari Map.
   factory ProfileModel.fromMap(Map<String, dynamic> map) {
     return ProfileModel(
       id: map['id'] as int,
